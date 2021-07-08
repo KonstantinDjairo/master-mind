@@ -1,0 +1,9 @@
+<nav class="navbar  justify-content-between shadow-lg p-3 mb-2 bg-white rounded">
+  <a class="navbar-brand " href=""> <h1>Cуперум действий </h1></a>
+  {% if user.is_authenticated %}
+    <h3> {{request.user}}</h3>
+  {% else %}
+     <h3><a href="">Login</a></p1></h3>
+  {% endif %}
+
+</nav>
