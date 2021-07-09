@@ -1,5 +1,5 @@
 from django.db import models
-
+from ..account.models import Profile
 
 class MetasCompleted(models.Model):
     user_name = models.CharField(null=False, unique=True, max_length=255, blank=False)

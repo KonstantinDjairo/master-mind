@@ -1,5 +1,7 @@
 import re
-from app.bot.botTelegram.services_bot import add_metas_completed, add_metas_incomplete
+
+from app.bot.botTelegram.services_bot import (add_metas_completed,
+                                              add_metas_incomplete)
 
 
 def filter_modes_complete(mensage, user_name):
@@ -53,10 +55,15 @@ def response_metas_complete(mensage, username):
     status_ok = filter_modes_complete(mensage, username)
 
     if status_ok:
-        return f"Tudo OK:\nParabens: {username} você concluiu: {completed_metas} e tem... e não concluiu: {x_metas}"
+        return f"Tudo OK:\nParabens: {username} você concluiu: {completed_metas} \n E não concluiu: {x_metas} "
     else:
-        return f"ERRO!!\n{username} verifique a mensagem, ela tem que seguir o padrão, ou fala com o ADM"
-     
+        return f"""ERRO!!\n
+            Ola{username}!!
+            os possoveis erros são:
+            > Não mandou a lista de metas a comprir\n
+            > A lista de metas esta errada, verifique a mensagem e se ela esta de acordo com o moude, caso esteja procure o ADM
+            
+        """
 
 def filter_modes_incomplete(mensage, username):
     """
@@ -82,11 +89,17 @@ def filter_modes_incomplete(mensage, username):
     else:
         return False
 
-    add_metas_incomplete(username, metas, metas_pro)
-    return True
+    status =  add_metas_incomplete(username, metas, metas_pro)
+    if status:
+        return True
+    else:
+        return False
 
 
 def response_metas_incomplete(mensage, username):
+    """
+        funtion
+    """
     metas_list_incomplete = re.findall("⏱", mensage)
     incomplete_metas = len(metas_list_incomplete)
 
@@ -95,4 +108,8 @@ def response_metas_incomplete(mensage, username):
     if status_ok:
         return f"Tudo OK:\n{username} você tem {incomplete_metas} para concluir, boa sorte!!!"
     else:
-        return f"ERRO!!\n{username} verifique a mensagem, ela tem que está de acordo com o moude"
+        return f"""ERRO!!\n
+            Ola{username}!!
+            os possoveis erros são:\n
+            Mensagem fora do padrão
+        """

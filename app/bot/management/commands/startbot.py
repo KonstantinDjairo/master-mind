@@ -3,6 +3,7 @@ from app.bot.main_bot import main
 
 
 class Command(BaseCommand):
+    # comando start bot
     help = 'start bot'
 
     def handle(self, *args, **kwargs):
