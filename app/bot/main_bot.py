@@ -1,11 +1,11 @@
 import logging
 
-from app.bot.botTelegram.bot_filters import (response_metas_complete,
-                                             response_metas_incomplete, create_profile, chek_profile)
+from app.bot.botTelegram.bot_filters import (chek_profile, create_profile,
+                                             response_metas_complete,
+                                             response_metas_incomplete)
 from telegram import ForceReply, Update
 from telegram.ext import (CallbackContext, CommandHandler, Filters,
                           MessageHandler, Updater)
-
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -33,24 +33,23 @@ def response(update: Update, context: CallbackContext) -> None:
     username = update.effective_user.username
     
     profile = chek_profile(username)
-
     if "/c" in mensage:
         text = create_profile(username)
         update.message.reply_text(text)
-    elif "/m" in mensage:
-        if not profile:
+    elif "/t" in mensage:
+        if profile:
             text = response_metas_complete(mensage, username)
             update.message.reply_text(text)
         else:
             update.message.reply_text("Faça um perfil com /c")
-    elif "/n" in mensage:
-        if not profile:
+    elif "/d" in mensage:
+        if profile:
             text = response_metas_incomplete(mensage, username)
             update.message.reply_text(text)
         else:
             update.message.reply_text("Faça um perfil com /c")
     else:
-        update.message.reply_text("ERRO!!!\npara adicionar as metas do dia use o comando \ n\npara adicionar a metas concluidas use o comando \m ")
+        update.message.reply_text("ERRO!!!\nPara adicionar as metas do dia use o comando \d\npara adicionar a metas concluidas use o comando \t ")
 
 
 def main() -> None:

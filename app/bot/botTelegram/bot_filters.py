@@ -1,7 +1,9 @@
 import re
 
 from app.bot.botTelegram.services_bot import (add_metas_completed,
-                                              add_metas_incomplete, create_profile_user, check_profile_exists)
+                                              add_metas_incomplete,
+                                              check_profile_exists,
+                                              create_profile_user)
 
 
 def filter_modes_complete(mensage, user_name):
@@ -57,8 +59,10 @@ def response_metas_complete(mensage, username):
     if status_ok:
         return f"Tudo OK:\nParabens: {username} você concluiu: {completed_metas} \n E não concluiu: {x_metas} "
     else:
-        return f"""ERRO!!\nOla{username}!!\nos possoveis erros são:> Não mandou a lista de metas a comprir\n
-        > A lista de metas esta errada, verifique a mensagem e se ela esta de acordo com o moude, caso esteja procure o ADM
+        return f"""ERRO!!\nOla{username}!!\n os possiveis erros são:
+Não mandou a sua TaskBox 
+Você ja mandou sua DoneList
+A lista de metas esta errada, verifique a mensagem e se ela esta de acordo com o moude, caso esteja procure o ADM
             
         """
 
@@ -85,7 +89,6 @@ def filter_modes_incomplete(mensage, username):
         metas = len(metas_list)
     else:
         return False
-
     status =  add_metas_incomplete(username, metas, metas_pro)
     if status:
         return True
@@ -103,19 +106,16 @@ def response_metas_incomplete(mensage, username):
     status_ok = filter_modes_incomplete(mensage, username)
 
     if status_ok:
-        return f"Tudo OK:\n{username} você tem {incomplete_metas} para concluir, boa sorte!!!"
+        return f"OK:\n{username} você tem {incomplete_metas} para concluir, boa sorte!!!"
     else:
-        return f"""ERRO!!\n
-            Ola{username}!!
-            os possoveis erros são:\n
-            Mensagem fora do padrão
+        return f"""ERRO!!\nOla {username}!! os possiveis erros são:\nMensagem fora do padrão\n Você ja mandou a sua TaskBox do dia 
         """
 
 
 def create_profile(username):
     status_ok = create_profile_user(username)
     if status_ok:
-        return "Pefil criado com sucesso"
+        return "OK!!\nPefil criado com sucesso"
     else:
         return "ERRO!!!\nPerfil já existe"
     

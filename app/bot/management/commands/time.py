@@ -16,3 +16,11 @@ class Command(BaseCommand):
       
         print(f"normal: {now.strftime('%d/%m/%Y')}")
         print(f"dango: {nowDj.strftime('%d/%m/%Y')}")
+        
+        print(f"hora djando: {nowDj.strftime('%H')}")
+        hora =  int(nowDj.strftime('%H'))
+        hora = 1
+        if hora < 10:
+            print("ok")
+        else:
+            print("nao")

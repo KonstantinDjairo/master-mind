@@ -7,6 +7,7 @@ class Profile(models.Model):
    
     first_name = models.CharField(max_length=200, blank=True, default="...")
     last_name = models.CharField(max_length=200, blank=True, default="...")
+    #icon = models.CharField(max_length=1, blank=True, default="🙂")
     created = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
