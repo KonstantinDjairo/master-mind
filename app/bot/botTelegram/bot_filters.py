@@ -1,7 +1,7 @@
 import re
 
 from app.bot.botTelegram.services_bot import (add_metas_completed,
-                                              add_metas_incomplete)
+                                              add_metas_incomplete, create_profile_user, check_profile_exists)
 
 
 def filter_modes_complete(mensage, user_name):
@@ -57,11 +57,8 @@ def response_metas_complete(mensage, username):
     if status_ok:
         return f"Tudo OK:\nParabens: {username} você concluiu: {completed_metas} \n E não concluiu: {x_metas} "
     else:
-        return f"""ERRO!!\n
-            Ola{username}!!
-            os possoveis erros são:
-            > Não mandou a lista de metas a comprir\n
-            > A lista de metas esta errada, verifique a mensagem e se ela esta de acordo com o moude, caso esteja procure o ADM
+        return f"""ERRO!!\nOla{username}!!\nos possoveis erros são:> Não mandou a lista de metas a comprir\n
+        > A lista de metas esta errada, verifique a mensagem e se ela esta de acordo com o moude, caso esteja procure o ADM
             
         """
 
@@ -113,3 +110,21 @@ def response_metas_incomplete(mensage, username):
             os possoveis erros são:\n
             Mensagem fora do padrão
         """
+
+
+def create_profile(username):
+    status_ok = create_profile_user(username)
+    if status_ok:
+        return "Pefil criado com sucesso"
+    else:
+        return "ERRO!!!\nPerfil já existe"
+    
+
+def chek_profile(user_name):
+    profile = check_profile_exists(user_name)
+    if profile:
+        return True
+    else:
+        return False
+
+        

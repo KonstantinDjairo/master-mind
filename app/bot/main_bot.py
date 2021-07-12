@@ -1,7 +1,7 @@
 import logging
 
 from app.bot.botTelegram.bot_filters import (response_metas_complete,
-                                             response_metas_incomplete)
+                                             response_metas_incomplete, create_profile, chek_profile)
 from telegram import ForceReply, Update
 from telegram.ext import (CallbackContext, CommandHandler, Filters,
                           MessageHandler, Updater)
@@ -31,15 +31,26 @@ def response(update: Update, context: CallbackContext) -> None:
     """resonse the user message."""
     mensage = update.message.text
     username = update.effective_user.username
-   
-    if "/m" in mensage:
-        text = response_metas_complete(mensage, username)
+    
+    profile = chek_profile(username)
+
+    if "/c" in mensage:
+        text = create_profile(username)
         update.message.reply_text(text)
+    elif "/m" in mensage:
+        if not profile:
+            text = response_metas_complete(mensage, username)
+            update.message.reply_text(text)
+        else:
+            update.message.reply_text("Faça um perfil com /c")
     elif "/n" in mensage:
-        text = response_metas_incomplete(mensage, username)
-        update.message.reply_text(text)
+        if not profile:
+            text = response_metas_incomplete(mensage, username)
+            update.message.reply_text(text)
+        else:
+            update.message.reply_text("Faça um perfil com /c")
     else:
-        update.message.reply_text("""ERRO!!!\npara adicionar as metas do dia use o comando \ n\npara adicionar a metas concluidas use o comando \m """)
+        update.message.reply_text("ERRO!!!\npara adicionar as metas do dia use o comando \ n\npara adicionar a metas concluidas use o comando \m ")
 
 
 def main() -> None:

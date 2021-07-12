@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from ..bot.models import MetasCompleted
+from ..bot.models import MetasCompleted, Profile
 
 
 def index(request):
+    #user = Profile.objects.all()
     result = MetasCompleted.objects.all()
-    for r in result:
-        print()
-    return render(request, "index/index.html", {"result": result})
+    
+    return render(request, "index/index.html",{"result": result})
 
 
