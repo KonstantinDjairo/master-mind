@@ -41,13 +41,13 @@ def response(update: Update, context: CallbackContext) -> None:
             text = response_metas_complete(mensage, username)
             update.message.reply_text(text)
         else:
-            update.message.reply_text("Faça um perfil com /c")
+            update.message.reply_text("Faça um perfil com /c + emojin\nUse um emojin da sua escolha ")
     elif "/d" in mensage:
         if profile:
             text = response_metas_incomplete(mensage, username)
             update.message.reply_text(text)
         else:
-            update.message.reply_text("Faça um perfil com /c")
+            update.message.reply_text("Faça um perfil com /c + emojin\nUse um emojin da sua escolha ")
     else:
         update.message.reply_text("ERRO!!!\nPara adicionar as metas do dia use o comando \d\npara adicionar a metas concluidas use o comando \t ")
 

@@ -4,6 +4,7 @@ from ..models import MetasCompleted, MetasIncomplete, Profile
 
 
 def check_profile_exists(user_name):
+
     profile_exists = Profile.objects.filter(user_name=user_name)
     if profile_exists:
         return True
@@ -83,7 +84,6 @@ def add_metas(metas_exists, user_name, streak, metas, metas_x, metas_pro, metas_
             return True
         else:
             return False
- 
 
 
 def add_metas_completed(user_name, streak, metas, metas_x, metas_pro, metas_pro_x):
@@ -97,7 +97,6 @@ def add_metas_completed(user_name, streak, metas, metas_x, metas_pro, metas_pro_
             return True
         else:
             return False
-    # se metas não existir ele vai quebrar o passo.
     else:
         return False
 

@@ -66,6 +66,7 @@ A lista de metas esta errada, verifique a mensagem e se ela esta de acordo com o
             
         """
 
+
 def filter_modes_incomplete(mensage, username):
     """
         ⏱
@@ -98,8 +99,9 @@ def filter_modes_incomplete(mensage, username):
 
 def response_metas_incomplete(mensage, username):
     """
-        funtion
+    response_metas_incomplete
     """
+
     metas_list_incomplete = re.findall("⏱", mensage)
     incomplete_metas = len(metas_list_incomplete)
 
@@ -127,4 +129,3 @@ def chek_profile(user_name):
     else:
         return False
 
-        
