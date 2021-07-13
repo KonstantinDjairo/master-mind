@@ -1,7 +1,8 @@
 import logging
 
-from app.bot.botTelegram.bot_filters import (chek_profile, create_profile,
-                                             response_metas_complete,
+from app.bot.botTelegram.commands_bot import *
+from app.bot.botTelegram.check_profile import check_profile_active, chek_profile
+from app.bot.botTelegram.bot_filters import (response_metas_complete,
                                              response_metas_incomplete)
 from telegram import ForceReply, Update
 from telegram.ext import (CallbackContext, CommandHandler, Filters,
@@ -31,30 +32,22 @@ def response(update: Update, context: CallbackContext) -> None:
     """resonse the user message."""
     mensage = update.message.text
     username = update.effective_user.username
-    
-    profile = chek_profile(username)
+
     if "/c" in mensage:
-        text = create_profile(username)
+        text = create(mensage, username)
         update.message.reply_text(text)
     elif "/t" in mensage:
-        if profile:
-            text = response_metas_complete(mensage, username)
-            update.message.reply_text(text)
-        else:
-            update.message.reply_text("Faça um perfil com /c + emojin\nUse um emojin da sua escolha ")
+        text = task_box(mensage, username)
+        update.message.reply_text(text)
     elif "/d" in mensage:
-        if profile:
-            text = response_metas_incomplete(mensage, username)
-            update.message.reply_text(text)
-        else:
-            update.message.reply_text("Faça um perfil com /c + emojin\nUse um emojin da sua escolha ")
+        text = done_list(mensage, username)
+        update.message.reply_text(text)
     else:
-        update.message.reply_text("ERRO!!!\nPara adicionar as metas do dia use o comando \d\npara adicionar a metas concluidas use o comando \t ")
+        update.message.reply_text("Comando não existe")
 
 
 def main() -> None:
     """Start the bot."""
-    # Create the Updater and pass it your bot's token.
     updater = Updater("1852237008:AAFMzbuyROUQbWj3J3dO2GZbXfGX6lOJ28g")
 
     # Get the dispatcher to register handlers
@@ -67,7 +60,6 @@ def main() -> None:
     # Filtra no comandos 
     dispatcher.add_handler(MessageHandler(Filters.text & Filters.command, response))
 
-    # Start the Bot
     updater.start_polling()
     updater.idle()
 

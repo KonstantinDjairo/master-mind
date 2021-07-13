@@ -1,9 +1,6 @@
 import re
 
-from app.bot.botTelegram.services_bot import (add_metas_completed,
-                                              add_metas_incomplete,
-                                              check_profile_exists,
-                                              create_profile_user)
+from app.bot.botTelegram.services_bot import (add_metas_completed, add_metas_incomplete)
 
 
 def filter_modes_complete(mensage, user_name):
@@ -34,12 +31,11 @@ def filter_modes_complete(mensage, user_name):
     if "Metas" in mensage:
         metas_list = re.findall("✅", mensage[0:start])
         metas_list_x = re.findall("❌", mensage[0: start])
-
         metas = len(metas_list)
         metas_x = len(metas_list_x)
+
     else:
         return False
-
     status = add_metas_completed(user_name, streak, metas, metas_x, metas_pro, metas_pro_x)
     if status:
         return True
@@ -48,23 +44,11 @@ def filter_modes_complete(mensage, user_name):
 
 
 def response_metas_complete(mensage, username):
-    metas_list_completed = re.findall("✅", mensage)
-    metas_list_x = re.findall("❌", mensage)
-    
-    completed_metas = len(metas_list_completed)
-    x_metas = len(metas_list_x)
-
-    status_ok = filter_modes_complete(mensage, username)
-
-    if status_ok:
-        return f"Tudo OK:\nParabens: {username} você concluiu: {completed_metas} \n E não concluiu: {x_metas} "
-    else:
-        return f"""ERRO!!\nOla{username}!!\n os possiveis erros são:
-Não mandou a sua TaskBox 
-Você ja mandou sua DoneList
-A lista de metas esta errada, verifique a mensagem e se ela esta de acordo com o moude, caso esteja procure o ADM
-            
-        """
+    """
+    response_metas_complete
+    """
+    status = filter_modes_complete(mensage, username)
+    return status
 
 
 def filter_modes_incomplete(mensage, username):
@@ -75,7 +59,6 @@ def filter_modes_incomplete(mensage, username):
         :param username:
         :return: lista
     """
-
     global metas_pro, start
     if "ProMode" in mensage:
         pro_mode = re.search(r"ProMode", mensage)
@@ -90,7 +73,7 @@ def filter_modes_incomplete(mensage, username):
         metas = len(metas_list)
     else:
         return False
-    status =  add_metas_incomplete(username, metas, metas_pro)
+    status = add_metas_incomplete(username, metas, metas_pro)
     if status:
         return True
     else:
@@ -101,31 +84,10 @@ def response_metas_incomplete(mensage, username):
     """
     response_metas_incomplete
     """
-
-    metas_list_incomplete = re.findall("⏱", mensage)
-    incomplete_metas = len(metas_list_incomplete)
-
-    status_ok = filter_modes_incomplete(mensage, username)
-
-    if status_ok:
-        return f"OK:\n{username} você tem {incomplete_metas} para concluir, boa sorte!!!"
-    else:
-        return f"""ERRO!!\nOla {username}!! os possiveis erros são:\nMensagem fora do padrão\n Você ja mandou a sua TaskBox do dia 
-        """
+    status = filter_modes_incomplete(mensage, username)
+    return status
 
 
-def create_profile(username):
-    status_ok = create_profile_user(username)
-    if status_ok:
-        return "OK!!\nPefil criado com sucesso"
-    else:
-        return "ERRO!!!\nPerfil já existe"
-    
 
-def chek_profile(user_name):
-    profile = check_profile_exists(user_name)
-    if profile:
-        return True
-    else:
-        return False
+
 

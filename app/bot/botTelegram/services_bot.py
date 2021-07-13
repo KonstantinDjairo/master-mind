@@ -1,47 +1,7 @@
 from django.utils import timezone
 
+from .check_profile import check_metas, check_time_task_box
 from ..models import MetasCompleted, MetasIncomplete, Profile
-
-
-def check_profile_exists(user_name):
-
-    profile_exists = Profile.objects.filter(user_name=user_name)
-    if profile_exists:
-        return True
-    else:
-        return False
-
-
-def create_profile_user(user_name):
-    user_exists = Profile.objects.filter(user_name=user_name)
-    if not user_exists:
-        Profile.objects.create(user_name=user_name)
-        return True
-    else:
-        return False
-
-
-def check_time_task_box():
-    time_str = timezone.now()
-    time = int(time_str.strftime('%H'))
-    print(time)
-    if time < 10:
-        print("abaixo das 10 horas")
-        return True
-    else:
-        return False
-    
-
-def check_metas(metas_exists, metas, metas_pro ):
-    for dado in metas_exists:
-        metas_ = dado.metas
-        metas_pro_ = dado.metas_pro
-        updated_ = dado.updated
-
-    if metas_ == metas and metas_pro_ == metas_pro:
-        return True
-    else:
-        return False
 
 
 def add_metas(metas_exists, user_name, streak, metas, metas_x, metas_pro, metas_pro_x):
@@ -57,12 +17,12 @@ def add_metas(metas_exists, user_name, streak, metas, metas_x, metas_pro, metas_
             MetasCompleted.objects.create(user_name=user, metas=metas,
                                           metas_pro=metas_pro, streak=streak,
                                           streak_count=streak_count + 1,
-                                          streak_max = 1)
+                                          streak_max=1)
             return True
         else:
             MetasCompleted.objects.create(user_name=user, metas=metas, 
                                           metas_pro=metas_pro, streak=streak,
-                                            streak_count=0, streak_max = 0)
+                                          streak_count=0, streak_max=0)
             return True
     else:
         if not current_data.strftime('%d/%m/%Y') == metas_user.updated.strftime('%d/%m/%Y'):
@@ -103,7 +63,7 @@ def add_metas_completed(user_name, streak, metas, metas_x, metas_pro, metas_pro_
 
 def add_metas_incomplete(user_name, metas, metas_pro):
     current_data = timezone.now()
-    
+
     user = Profile.objects.filter(user_name=user_name).first()
     user_metas = MetasIncomplete.objects.filter(user_name=user.pk).first()
     status_ok = check_time_task_box()
@@ -117,7 +77,7 @@ def add_metas_incomplete(user_name, metas, metas_pro):
     else:
         if not current_data.strftime('%d/%m/%Y') == user_metas.updated.strftime('%d/%m/%Y'):
             metas_incomplete = MetasIncomplete.objects.get(pk=user_metas.pk)
-            metas_incomplete.metas =  metas
+            metas_incomplete.metas = metas
             metas_incomplete.metas_pro = metas_pro
             metas_incomplete.save(force_update=True)
             return True

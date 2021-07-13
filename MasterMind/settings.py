@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'MasterMind.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'master_mind',
+        'NAME': 'master_mind_test',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
