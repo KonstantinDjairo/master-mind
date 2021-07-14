@@ -1,6 +1,6 @@
 from django.utils import timezone
 
-from app.bot.bot_telegram.check_profile import check_metas
+from app.bot.bot_telegram.services.check_profile import check_metas
 from app.bot.models import MetasCompleted, Profile, MetasIncomplete
 
 

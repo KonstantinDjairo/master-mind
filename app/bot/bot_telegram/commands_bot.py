@@ -1,6 +1,6 @@
 from app.bot.bot_telegram.bot_filters import response_metas_complete,\
     response_metas_incomplete
-from .check_profile import check_profile_exists, check_profile_active, \
+from app.bot.bot_telegram.services.check_profile import check_profile_exists, check_profile_active, \
     check_time_task_box
 from app.bot.bot_telegram.services.create_profile import create_profile
 

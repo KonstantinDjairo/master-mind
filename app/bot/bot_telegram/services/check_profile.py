@@ -1,6 +1,6 @@
 from django.utils import timezone
 
-from ..models import Profile
+from app.bot.models import Profile
 
 
 def check_profile_exists(user_name):

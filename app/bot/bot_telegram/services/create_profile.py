@@ -1,4 +1,4 @@
-from app.bot.bot_telegram.check_profile import check_profile_exists
+from app.bot.bot_telegram.services.check_profile import check_profile_exists
 from app.bot.models import Profile
 
 
