@@ -1,7 +1,7 @@
 import re
 
-from app.bot.botTelegram.services.done_list import add_metas_completed
-from app.bot.botTelegram.services.task_box import add_metas_incomplete
+from app.bot.bot_telegram.services.done_list import add_metas_completed
+from app.bot.bot_telegram.services.task_box import add_metas_incomplete
 
 
 def filter_modes_complete(mensage, user_name):
