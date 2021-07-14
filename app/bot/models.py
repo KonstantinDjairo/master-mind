@@ -17,7 +17,7 @@ class Profile(models.Model):
 
 
 class Edition(models.Model):
-    title = models.CharField(max_length=100, null=False, default='Edição')
+    title = models.CharField(max_length=100, null=False, default='Edition')
     description = models.TextField(default="Description....")
 
     number = models.IntegerField(null=False, blank=False, unique=True)

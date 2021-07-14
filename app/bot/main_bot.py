@@ -1,9 +1,7 @@
 import logging
 
-from app.bot.botTelegram.commands_bot import *
-from app.bot.botTelegram.check_profile import check_profile_active, chek_profile
-from app.bot.botTelegram.bot_filters import (response_metas_complete,
-                                             response_metas_incomplete)
+from app.bot.bot_telegram.commands_bot import *
+
 from telegram import ForceReply, Update
 from telegram.ext import (CallbackContext, CommandHandler, Filters,
                           MessageHandler, Updater)

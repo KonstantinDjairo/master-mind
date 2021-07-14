@@ -1,8 +1,8 @@
-from app.bot.botTelegram.bot_filters import response_metas_complete,\
+from app.bot.bot_telegram.bot_filters import response_metas_complete,\
     response_metas_incomplete
 from .check_profile import check_profile_exists, check_profile_active, \
     check_time_task_box
-from .create_profile import create_profile
+from app.bot.bot_telegram.services.create_profile import create_profile
 
 
 def create(mensage, username):
@@ -16,7 +16,7 @@ def create(mensage, username):
 def task_box(mensage, user_name):
     exists = check_profile_exists(user_name)
     if not exists:
-        return "User não existe"
+        return "User não existe \n/c 🤝"
     check_time = check_time_task_box()
     # if not cheak_time
     if check_time:
@@ -45,6 +45,6 @@ def done_list(mensage, user_name):
     if status:
         return f"Tudo OK:\nParabens: {user_name} "
     else:
-        return "ERRo"
+        return "ERRO"
 
 

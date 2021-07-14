@@ -1,6 +1,7 @@
 import re
 
-from app.bot.botTelegram.services_bot import (add_metas_completed, add_metas_incomplete)
+from app.bot.botTelegram.services.done_list import add_metas_completed
+from app.bot.botTelegram.services.task_box import add_metas_incomplete
 
 
 def filter_modes_complete(mensage, user_name):
@@ -43,14 +44,6 @@ def filter_modes_complete(mensage, user_name):
         return False
 
 
-def response_metas_complete(mensage, username):
-    """
-    response_metas_complete
-    """
-    status = filter_modes_complete(mensage, username)
-    return status
-
-
 def filter_modes_incomplete(mensage, username):
     """
         ⏱
@@ -88,6 +81,12 @@ def response_metas_incomplete(mensage, username):
     return status
 
 
+def response_metas_complete(mensage, username):
+    """
+    response_metas_complete
+    """
+    status = filter_modes_complete(mensage, username)
+    return status
 
 
 

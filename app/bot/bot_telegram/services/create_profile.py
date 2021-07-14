@@ -1,5 +1,5 @@
-from .check_profile import check_profile_exists
-from ..models import Profile
+from app.bot.bot_telegram.check_profile import check_profile_exists
+from app.bot.models import Profile
 
 
 def create_profile(mensage, user_name):

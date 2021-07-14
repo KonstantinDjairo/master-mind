@@ -1,13 +1,16 @@
 from django.utils import timezone
 
-from .check_profile import check_metas, check_time_task_box
-from ..models import MetasCompleted, MetasIncomplete, Profile
+from app.bot.botTelegram.check_profile import check_metas
+from app.bot.models import MetasCompleted, Profile, MetasIncomplete
 
 
 def add_metas(metas_exists, user_name, streak, metas, metas_x, metas_pro, metas_pro_x):
+    """
+    ADD DOTLIST
+    """
     current_data = timezone.now()
-    streak_count = 0  
-     
+    streak_count = 0
+
     user = Profile.objects.filter(user_name=user_name).first()
     metas_user = MetasCompleted.objects.filter(user_name=user.pk).first()
     metas_ok = check_metas(metas_exists, metas, metas_pro)
@@ -20,7 +23,7 @@ def add_metas(metas_exists, user_name, streak, metas, metas_x, metas_pro, metas_
                                           streak_max=1)
             return True
         else:
-            MetasCompleted.objects.create(user_name=user, metas=metas, 
+            MetasCompleted.objects.create(user_name=user, metas=metas,
                                           metas_pro=metas_pro, streak=streak,
                                           streak_count=0, streak_max=0)
             return True
@@ -47,11 +50,14 @@ def add_metas(metas_exists, user_name, streak, metas, metas_x, metas_pro, metas_
 
 
 def add_metas_completed(user_name, streak, metas, metas_x, metas_pro, metas_pro_x):
+    """
+    ADD DOTLIST
+    """
     user = Profile.objects.filter(user_name=user_name).first()
     metas_exists = MetasIncomplete.objects.filter(user_name=user.pk)
-  
+
     if metas_exists:
-        status_ok = add_metas(metas_exists, user_name,  streak, metas,
+        status_ok = add_metas(metas_exists, user_name, streak, metas,
                               metas_x, metas_pro, metas_pro_x)
         if status_ok:
             return True
@@ -59,29 +65,3 @@ def add_metas_completed(user_name, streak, metas, metas_x, metas_pro, metas_pro_
             return False
     else:
         return False
-
-
-def add_metas_incomplete(user_name, metas, metas_pro):
-    current_data = timezone.now()
-
-    user = Profile.objects.filter(user_name=user_name).first()
-    user_metas = MetasIncomplete.objects.filter(user_name=user.pk).first()
-    status_ok = check_time_task_box()
-    
-    if not status_ok:
-        return False
-    elif not user_metas:
-        MetasIncomplete.objects.create(user_name=user, metas=metas,
-                                       metas_pro=metas_pro)
-        return True
-    else:
-        if not current_data.strftime('%d/%m/%Y') == user_metas.updated.strftime('%d/%m/%Y'):
-            metas_incomplete = MetasIncomplete.objects.get(pk=user_metas.pk)
-            metas_incomplete.metas = metas
-            metas_incomplete.metas_pro = metas_pro
-            metas_incomplete.save(force_update=True)
-            return True
-        else:
-            return False
-    
-
