@@ -27,5 +27,4 @@ def create_done_list_false(user_name, streak, metas, metas_pro):
                                   metas_pro=metas_pro, streak=streak,
                                   streak_count=0, streak_max=0,
                                   edition=edition)
-    print("chegou create_done_list_false")
     return ranking_conf(user_name)

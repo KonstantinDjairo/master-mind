@@ -6,8 +6,13 @@ def create_ranking(profile, points_user, edition):
                            edition=edition)
     return True
 
-def update_ranking(profile, points_user, edition):
 
+def update_ranking(profile, points_user, edition):
+    ranking = Ranking.objects.get(pk=profile.pk, edition=edition.pk)
+
+    ranking.points = ranking.points + points_user
+    ranking.save()
+    return True
 
 
 def ranking_conf(user_name):
@@ -18,11 +23,11 @@ def ranking_conf(user_name):
         return False
 
     points_metas = MetasCompleted.objects.get(user_name=user_name)
-
     for points in points_metas:
         points_user += points.metas + points.metas_pro
-    # aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa edição e os caralh0p
-    ranking = Ranking.objects.filter(user_name=profile).first()
+
+    ranking = Ranking.objects.filter(user_name=profile, edition=edition) \
+        .first()
 
     if ranking:
         return update_ranking(profile, points_user, edition)
