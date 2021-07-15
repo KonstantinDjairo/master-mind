@@ -15,7 +15,8 @@ def check_time_task_box():
     time_str = timezone.now()
     time = int(time_str.strftime('%H'))
 
-    if time < 10:
+    # if time < 10
+    if time > 10:
         return True
     else:
         return False

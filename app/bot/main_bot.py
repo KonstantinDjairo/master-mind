@@ -28,17 +28,17 @@ def help_command(update: Update, context: CallbackContext) -> None:
 
 def response(update: Update, context: CallbackContext) -> None:
     """resonse the user message."""
-    mensage = update.message.text
+    message = update.message.text
     username = update.effective_user.username
 
-    if "/c" in mensage:
-        text = create(mensage, username)
+    if "/c" in message:
+        text = create(message, username)
         update.message.reply_text(text)
-    elif "/t" in mensage:
-        text = task_box(mensage, username)
+    elif "/t" in message:
+        text = task_box(message, username)
         update.message.reply_text(text)
-    elif "/d" in mensage:
-        text = done_list(mensage, username)
+    elif "/d" in message:
+        text = done_list(message, username)
         update.message.reply_text(text)
     else:
         update.message.reply_text("Comando não existe")
@@ -55,7 +55,7 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("help", help_command))
 
-    # Filtra no comandos 
+    # on commands
     dispatcher.add_handler(MessageHandler(Filters.text & Filters.command, response))
 
     updater.start_polling()
