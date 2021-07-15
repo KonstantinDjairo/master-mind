@@ -1,0 +1,80 @@
+Por exemplo, a pessoa termina a edição 2 com 200.
+Na 3ª Edição ele começa com 0 nela, obviamente, mas no ranking geral ele tá com 200.
+Então na 3ª Edição ele só precisa de +100 pontos pra subir de nível
+>>>>
+Pra ele ganhar bônus, só precisa confirmar se todos os ícones são (✅)
+Perde bônus e quebra a sequência da pessoa
+>>>
+E se ele detectar (❌), não dá bônus
+Cada ícone detectado equivale a soma de 0.1
+>>>
+Para o bot ler melhor a DONELIST, ele só precisa contabilizar os ÍCONES (✅)
+>>>
+Ele tem função de envio de mensagem programada?
+>>
+✅ Boa noite Guerreiro! Hora de enviar a sua #DoneList!
+Obs: O Prazo de envio é até hoje às 23:59. Se você não enviar antes desse horário, seus pontos serão perdidos.
+(Responda essa mensagem com a sua DoneList).
+>>>
+❌ Prazo de Envio da DoneList Encerrado!
+>>>
+📝 Bom dia Guerreiro! Hora de enviar o seu #TaskBox!
+Obs: O Prazo de envio é até hoje às 09:59. Se você não enviar antes desse horário, seus pontos serão perdidos.
+(Responda essa mensagem com o seu TaskBox).
+>>>
+O bot recebeu os dados do User, ele já atualiza no placar
+>>>
+Metas são personalizadas de acordo com o objetivo do membro.
+ProModes são missões fixas, essas eu posso te mandar.
+>>>
+O bot envia a mensagem automática, os membros enviam suas TaskBox e DoneList
+>>>
+/m 
+🦁: Pappelino - Nvl. 5 (Capitão)
+
+Metas
+✅ Ler 25 páginas
+✅ Post #NNC
+✅ Ler a Bíblia
+
+ProMode
+✅ Educação Alimentar
+✅ Meditação (30 min)
+✅ Escrever em diário
+✅ Tomar 2L d'água
+✅ WimHof Method
+✅ Leitura de livros
+❌ Banho Gelado
+❌ Oração
+
+Objetivo
+🏆 Ler 1.000 páginas de livros
+>>
+Isto é, aqui calcula 11 atividades = 1.1 pts
+Esses 1.1 pts serão somados a cada dia
+>>>
+Cada missão concluída: 0.1 (⭐️)
+Todas as missões concluídas: 1.0 (💎)
+Sequência perfeita de 7 dias: 10.0 (🏅)
+Sequência de 30 dias: 50.0 (🏆)
+>>
+/n
+🦁: Pappelino - Nvl. 5 (Capitão)
+
+Metas
+⏱ Ler 25 páginas
+⏱ Post #NNC
+⏱ Ler a Bíblia
+
+ProMode
+⏱ Educação Alimentar
+⏱ Meditação (30 min)
+⏱ Escrever em diário
+⏱ Tomar 2L d'água
+⏱ WimHof Method
+⏱ Leitura de livros
+⏱ Banho Gelado
+⏱ Oração
+
+Objetivo
+🏆 Ler 1.000 páginas de livro
