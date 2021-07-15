@@ -23,11 +23,7 @@ def check_time_task_box():
 
 
 def check_metas(metas_exists, metas, metas_pro):
-    for dado in metas_exists:
-        metas_ = dado.metas
-        metas_pro_ = dado.metas_pro
-
-    if metas_ == metas and metas_pro_ == metas_pro:
+    if metas_exists.metas == metas and metas_exists.metas_pro == metas_pro:
         return True
     else:
         return False

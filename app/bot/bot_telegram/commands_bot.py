@@ -3,6 +3,7 @@ from app.bot.bot_telegram.bot_filters import response_metas_complete,\
 from app.bot.bot_telegram.services.check_profile import check_profile_exists,\
     check_profile_active, check_time_task_box
 from app.bot.bot_telegram.services.create_profile import create_profile
+from app.bot.bot_telegram.services.done_list.check_done_list import check_done_list_exists
 from app.bot.bot_telegram.services.task_box.check_task_bot import check_task_exists
 
 
@@ -24,6 +25,9 @@ def task_box(message, user_name):
     elif not check_profile_active(user_name):
         return "User Bloqueado"
 
+    elif check_task_exists(user_name):
+        return "Você ja adicionou task box hoje "
+
     elif response_metas_incomplete(message, user_name):
         return f"Tudo OK:\nParabens: {user_name} "
     else:
@@ -36,8 +40,12 @@ def done_list(message, user_name):
 
     elif not check_profile_active(user_name):
         return "User Bloqueado"
+
     elif not check_task_exists(user_name):
         return "Você não adicionou a task box de hoje "
+
+    elif check_done_list_exists(user_name):
+        return "Você ja adicionou done_list hoje "
 
     elif response_metas_complete(message, user_name):
         return f"Tudo OK:\nParabens: {user_name}"

@@ -1,8 +1,9 @@
-from app.bot.models import MetasIncomplete, Edition, Profile, MetasCompleted
 from django.utils import timezone
 
+from app.bot.models import MetasIncomplete, Edition, Profile, MetasCompleted
 
-def check_task_exists(user_name):
+
+def check_done_list_exists(user_name):
     current_data = timezone.now()
     current_data = current_data.strftime('%d/%m/%Y')
 
@@ -14,11 +15,17 @@ def check_task_exists(user_name):
 
     metas_incomplete = MetasIncomplete.objects.filter(user_name=user_name.pk,
                                                       edition=edition.pk).last()
+    metas_complete = MetasCompleted.objects.filter(user_name=user_name.pk,
+                                                   edition=edition.pk).last()
     if not metas_incomplete:
+
+        return False
+    if not metas_complete:
         return False
 
-    data_incomplete = metas_incomplete.updated.strftime('%d/%m/%Y')
-    if data_incomplete == current_data:
+    data_complete = metas_complete.updated.strftime('%d/%m/%Y')
+    print(data_complete + " - " + current_data)
+    if data_complete == current_data:
         return True
     else:
         return False

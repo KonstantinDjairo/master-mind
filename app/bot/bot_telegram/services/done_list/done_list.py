@@ -42,6 +42,7 @@ def add_metas_done_list(user_name, streak, metas, metas_pro):
 
     user = Profile.objects.filter(user_name=user_name).first()
     metas_user = MetasCompleted.objects.filter(user_name=user.pk).last()
+
     metas_exists = MetasIncomplete.objects.filter(user_name=user.pk).last()
     date_task_box = metas_exists.updated.strftime('%d/%m/%Y')
 
@@ -53,7 +54,7 @@ def add_metas_done_list(user_name, streak, metas, metas_pro):
     else:
         metas_user_data = metas_user.updated.strftime('%d/%m/%Y')
         if not current_data == metas_user_data and metas_user_data == date_task_box:
-            print("okkkk passou aqui")
+
             metas_ok = check_metas(metas_exists, metas, metas_pro)
             return add_done_list(metas_user, streak, metas, metas_pro,
                                  metas_ok, user_name)
