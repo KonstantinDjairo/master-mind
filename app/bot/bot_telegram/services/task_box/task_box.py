@@ -16,9 +16,9 @@ def create_task_box(user_name, metas, metas_pro):
 
 
 def add_task_bot(user_name, metas, metas_pro, user_pk):
-    edition = Edition.objects.filter(active=True).first()
     metas_incomplete = MetasIncomplete.objects.get(pk=user_pk)
 
+    edition = Edition.objects.filter(active=True).first()
     if not edition:
         return False
     elif edition.pk == metas_incomplete.edition:
