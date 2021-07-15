@@ -1,4 +1,4 @@
-from app.bot.bot_telegram.services.done_list.add_ranking import ranking_conf
+from app.bot.bot_telegram.services.ranking.add_ranking import ranking_conf
 from app.bot.models import MetasCompleted, Edition, Profile
 
 

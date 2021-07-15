@@ -1,7 +1,7 @@
 from django.utils import timezone
 
 from app.bot.bot_telegram.services.check_profile import check_metas
-from app.bot.bot_telegram.services.done_list.add_ranking import ranking_conf
+from app.bot.bot_telegram.services.ranking.add_ranking import ranking_conf
 from app.bot.bot_telegram.services.done_list.done_list_create import \
     create_done_list_true, create_done_list_false
 from app.bot.models import MetasCompleted, Profile, MetasIncomplete, Edition

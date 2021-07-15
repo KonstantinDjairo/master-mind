@@ -39,6 +39,9 @@ class Ranking(models.Model):
     class Meta:
         ordering = ["points"]
 
+    def __str__(self):
+        return str(self.user_name)
+
     
 class MetasCompleted(models.Model):
     user_name = models.ForeignKey(Profile, on_delete=models.PROTECT)

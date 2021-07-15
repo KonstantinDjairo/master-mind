@@ -22,12 +22,12 @@ def start(update: Update, context: CallbackContext) -> None:
 
 
 def help_command(update: Update, context: CallbackContext) -> None:
-    """Send a message when the command /help is issued."""
+    """ Send a message when the command /help is issued."""
     update.message.reply_text('Help!')
 
 
 def response(update: Update, context: CallbackContext) -> None:
-    """resonse the user message."""
+    """ resonse the user message."""
     message = update.message.text
     username = update.effective_user.username
 

@@ -1,4 +1,4 @@
-from app.bot.bot_telegram.bot_filters import response_metas_complete,\
+from app.bot.bot_telegram.message_filters.bot_filters import response_metas_complete,\
     response_metas_incomplete
 from app.bot.bot_telegram.services.check_profile import check_profile_exists,\
     check_profile_active, check_time_task_box
@@ -8,6 +8,10 @@ from app.bot.bot_telegram.services.task_box.check_task_bot import check_task_exi
 
 
 def create(message, username):
+    """
+    create profile with the user_name from the telegram and an emoji chosen by the user,
+    if the user does not choose an emoji and set a default
+    """
     status = create_profile(message, username)
     if status:
         return "Criado, agora pode mandar sua task box"
@@ -16,6 +20,10 @@ def create(message, username):
 
 
 def task_box(message, user_name):
+    """
+    create a task box, with the message and the user
+    """
+
     if not check_profile_exists(user_name):
         return "User não existe \n/c 🤝"
 
@@ -35,6 +43,9 @@ def task_box(message, user_name):
 
 
 def done_list(message, user_name):
+    """
+    create a done list , with the message and the user
+    """
     if not check_profile_exists(user_name):
         return "User não existe"
 
