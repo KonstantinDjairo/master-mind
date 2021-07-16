@@ -13,11 +13,13 @@ from apps.bot.bot_telegram.services.task_box.check_task_bot import \
 
 def create(message, user_name):
     """
-    create profile with the user_name from the telegram and an emoji chosen by the user,
+    create profile with the user_name from the telegram and an
+    emoji chosen by the user,
     if the user does not choose an emoji and set a default
     """
     if check_profile_exists(user_name):
-        return f"Você ja tem um perfil '{user_name}', ja pode mandar sua Task Box"
+        return f"Você ja tem um perfil '{user_name}', ja pode mandar sua" \
+               f" Task Box"
 
     if create_profile(message, user_name):
         return "Criado, agora pode mandar sua task box"

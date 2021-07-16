@@ -11,11 +11,12 @@ def create_task_box(user_name, metas, metas_pro):
         MetasIncomplete.objects.create(user_name=profile, metas=metas,
                                        metas_pro=metas_pro, edition=edition)
         return True
-    except:
+    except ValueError as e:
+        print(f"erro create_task_box: {e}")
         return False
 
 
-def add_task_bot(user_name, metas, metas_pro, user_pk):
+def add_task_box(user_name, metas, metas_pro, user_pk):
     metas_incomplete = MetasIncomplete.objects.get(pk=user_pk)
 
     edition = Edition.objects.filter(active=True).first()
@@ -49,5 +50,4 @@ def add_metas_task_box(user_name, metas, metas_pro):
         return create_task_box(user_name, metas, metas_pro)
     else:
         if not current_data == task.updated.strftime('%d/%m/%Y'):
-            return add_task_bot(user_name, metas, metas_pro, task.pk)
-
+            return add_task_box(user_name, metas, metas_pro, task.pk)

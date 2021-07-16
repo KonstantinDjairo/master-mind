@@ -1,6 +1,7 @@
 import re
 
-from apps.bot.bot_telegram.services.done_list.done_list import add_metas_completed
+from apps.bot.bot_telegram.services.done_list.done_list import\
+    add_metas_completed
 
 
 def filter_done_list(message, user_name):
@@ -17,10 +18,10 @@ def filter_done_list(message, user_name):
         pro_mode = re.search(r"ProMode", message)
         start = pro_mode.start()
         end = len(message)
-        mensage_pro_mode = message[start:end]
+        message_pro_mode = message[start:end]
 
-        meta_pro_list_completed = re.findall("✅", mensage_pro_mode)
-        metas_pro_list_x = re.findall("❌", mensage_pro_mode)
+        meta_pro_list_completed = re.findall("✅", message_pro_mode)
+        metas_pro_list_x = re.findall("❌", message_pro_mode)
 
         metas_pro = len(meta_pro_list_completed)
         metas_pro_x = len(metas_pro_list_x)
@@ -34,10 +35,7 @@ def filter_done_list(message, user_name):
     else:
         return False
 
-    if add_metas_completed(user_name, streak, metas, metas_pro):
-        return True
-    else:
-        return False
+    return add_metas_completed(user_name, streak, metas, metas_pro)
 
 
 def response_done_list(message, user_name):

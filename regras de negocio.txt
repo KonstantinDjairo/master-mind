@@ -2,9 +2,17 @@ Por exemplo, a pessoa termina a edição 2 com 200.
 Na 3ª Edição ele começa com 0 nela, obviamente, mas no ranking geral ele tá com 200.
 Então na 3ª Edição ele só precisa de +100 pontos pra subir de nível
 >>>>
+done tem que ser igual a task list.
+>>
+vc subiu de nivel, 7 niveis, 
+>>
 Pra ele ganhar bônus, só precisa confirmar se todos os ícones são (✅)
 Perde bônus e quebra a sequência da pessoa
 >>>
+streak de 7 dias, 1o pontos
+>>
+progrmar edição
+>>
 E se ele detectar (❌), não dá bônus
 Cada ícone detectado equivale a soma de 0.1
 >>>
