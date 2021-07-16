@@ -1,3 +1,8 @@
 body{
     background-color: rgb(97, 110, 248);
 }
+
+.logo{
+    width: 10px;
+    height: 10px;
+}
