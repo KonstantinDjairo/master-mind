@@ -1,8 +1,9 @@
 import re
-from apps.bot.bot_telegram.services.task_box.task_box import add_metas_task_box
+from apps.bot.bot_telegram.services.task_box.task_box import \
+    add_metas_task_box
 
 
-def filter_task_box(message, user_name):
+def filter_task_box(message, id_user):
     """
         ⏱
         é isso ai
@@ -25,11 +26,11 @@ def filter_task_box(message, user_name):
     else:
         return False
 
-    return add_metas_task_box(user_name, metas, metas_pro)
+    return add_metas_task_box(id_user, metas, metas_pro)
 
 
-def response_task_box(message, user_name):
+def response_task_box(message, id_user):
     """
     response_metas_incomplete
     """
-    return filter_task_box(message, user_name)
+    return filter_task_box(message, id_user)

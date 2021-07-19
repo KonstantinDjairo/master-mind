@@ -1,53 +1,57 @@
 from django.utils import timezone
 
-from apps.bot.bot_telegram.services.check_profile import check_time_task_box
-from apps.bot.models import MetasIncomplete, Profile, Edition
+from apps.bot.bot_telegram.services.profile.check_profile import check_time_task_box
+from apps.bot.models import TaskBox, Profile, Edition
 
 
-def create_task_box(user_name, metas, metas_pro):
+def create_task_box(id_user, metas, metas_pro):
     try:
-        edition = Edition.objects.filter(active=True).first()
-        profile = Profile.objects.filter(user_name=user_name).first()
-        MetasIncomplete.objects.create(user_name=profile, metas=metas,
-                                       metas_pro=metas_pro, edition=edition)
+        edition = Edition.objects.filter(active=True).last()
+        profile = Profile.objects.filter(id_user=id_user).last()
+        TaskBox.objects.create(id_user=profile, metas=metas,
+                               metas_pro=metas_pro, edition=edition)
         return True
     except ValueError as e:
-        print(f"erro create_task_box: {e}")
+        print(f"Erro create_task_box: {e}")
         return False
 
 
-def add_task_box(user_name, metas, metas_pro, user_pk):
-    metas_incomplete = MetasIncomplete.objects.get(pk=user_pk)
-
+def add_task_box(id_user, metas, metas_pro, user_pk):
+    task_box = TaskBox.objects.filter(pk=user_pk).last()
     edition = Edition.objects.filter(active=True).first()
     if not edition:
         return False
-    elif edition.pk == metas_incomplete.edition:
-        metas_incomplete = MetasIncomplete.objects.get(pk=user_pk)
-        metas_incomplete.metas = metas
-        metas_incomplete.metas_pro = metas_pro
-        metas_incomplete.edition = edition.pk
-        metas_incomplete.save(force_update=True)
-        return True
+    elif edition.pk == task_box.edition:
+        try:
+            task_box = TaskBox.objects.get(pk=user_pk)
+            task_box.metas = metas
+            task_box.metas_pro = metas_pro
+            task_box.edition = edition.pk
+            task_box.save(force_update=True)
+            return True
+        except ValueError as e:
+            print(f"Erro add_task_box: {e}")
+            return False
     else:
-        return create_task_box(user_name, metas, metas_pro)
+        return create_task_box(id_user, metas, metas_pro)
 
 
-def add_metas_task_box(user_name, metas, metas_pro):
+def add_metas_task_box(id_user, metas, metas_pro):
     """
     ADD task box
     """
     current_data = timezone.now()
     current_data = current_data.strftime('%d/%m/%Y')
-    user = Profile.objects.filter(user_name=user_name).first()
-    if user:
-        task = MetasIncomplete.objects.filter(user_name=user.pk).first()
+    profile = Profile.objects.filter(id_user=id_user).last()
+
+    if profile:
+        task = TaskBox.objects.filter(id_user=profile.pk).last()
     else:
         return False
     if not check_time_task_box():
         return False
     elif not task:
-        return create_task_box(user_name, metas, metas_pro)
+        return create_task_box(id_user, metas, metas_pro)
     else:
         if not current_data == task.updated.strftime('%d/%m/%Y'):
-            return add_task_box(user_name, metas, metas_pro, task.pk)
+            return add_task_box(id_user, metas, metas_pro, task.pk)

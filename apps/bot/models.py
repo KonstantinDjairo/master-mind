@@ -2,27 +2,32 @@ from django.db import models
 
 
 class Profile(models.Model):
-    # user_name do telegram como user                         
-    user_name = models.CharField(null=False, unique=True, max_length=100, blank=False)
-   
+    user_name = models.CharField(null=False, unique=False, max_length=100, blank=True)
+    id_user = models.IntegerField(null=False, unique=True)
     first_name = models.CharField(max_length=100, blank=True, default="...")
     last_name = models.CharField(max_length=100, blank=True, default="...")
-    icon = models.CharField(max_length=1, blank=True, default="🙂")
+    icon = models.CharField(max_length=2, blank=True, default="🙂")
     
     active = models.BooleanField(null=False, default=True)
     created = models.DateTimeField(auto_now_add=True)
-    
+    updated = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return self.user_name
 
 
 class Edition(models.Model):
-
     title = models.CharField(max_length=100, null=False, default='Edition')
     description = models.TextField(default="Description....")
 
-    number = models.IntegerField(null=False, blank=False, unique=True)
+    number = models.IntegerField(null=False, blank=False, unique=True, auto_created=True)
     active = models.BooleanField(null=False, default=True)
+
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["-number"]
@@ -32,9 +37,12 @@ class Edition(models.Model):
 
 
 class Ranking(models.Model):
-    user_name = models.ForeignKey(Profile, on_delete=models.PROTECT)
-    points = models.IntegerField(null=False, blank=False, default=0)
+    id_user = models.ForeignKey(Profile, on_delete=models.PROTECT)
     edition = models.ManyToManyField(Edition)
+
+    points = models.IntegerField(null=False, blank=False, default=0)
+    metas = models.FloatField(blank=True, default=0)
+    metas_pro = models.FloatField(blank=True, default=0)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -43,12 +51,13 @@ class Ranking(models.Model):
         ordering = ["-points"]
 
     def __str__(self):
-        return str(self.user_name)
+        return str(self.id_user)
 
     
-class MetasCompleted(models.Model):
-    user_name = models.ForeignKey(Profile, on_delete=models.PROTECT)
-    edition = models.ForeignKey(Edition, on_delete=models.CASCADE)
+class DoneList(models.Model):
+    id_user = models.ForeignKey(Profile, on_delete=models.PROTECT)
+    edition = models.ForeignKey(Edition, on_delete=models.PROTECT)
+
     metas = models.FloatField(blank=True, default=0)
     metas_pro = models.FloatField(blank=True, default=0)
 
@@ -60,12 +69,12 @@ class MetasCompleted(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.user_name)
+        return str(self.id_user)
 
     
-class MetasIncomplete(models.Model):
-    user_name = models.ForeignKey(Profile, on_delete=models.PROTECT)
-    edition = models.ForeignKey(Edition, on_delete=models.CASCADE)
+class TaskBox(models.Model):
+    id_user = models.ForeignKey(Profile, on_delete=models.PROTECT)
+    edition = models.ForeignKey(Edition, on_delete=models.PROTECT)
       
     metas = models.FloatField(blank=True, default=0)
     metas_pro = models.FloatField(blank=True, default=0)
@@ -74,7 +83,7 @@ class MetasIncomplete(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.user_name)
+        return str(self.id_user)
     
 
 

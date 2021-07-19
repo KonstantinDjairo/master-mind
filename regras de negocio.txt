@@ -1,4 +1,4 @@
-Por exemplo, a pessoa termina a edição 2 com 200.
++Por exemplo, a pessoa termina a edição 2 com 200.
 Na 3ª Edição ele começa com 0 nela, obviamente, mas no ranking geral ele tá com 200.
 Então na 3ª Edição ele só precisa de +100 pontos pra subir de nível
 >>>>

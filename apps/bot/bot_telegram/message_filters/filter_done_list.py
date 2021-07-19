@@ -4,7 +4,7 @@ from apps.bot.bot_telegram.services.done_list.done_list import\
     add_metas_completed
 
 
-def filter_done_list(message, user_name):
+def filter_done_list(message, id_user):
     """
         ✅ ou ❌
         é isso ai
@@ -35,13 +35,13 @@ def filter_done_list(message, user_name):
     else:
         return False
 
-    return add_metas_completed(user_name, streak, metas, metas_pro)
+    return add_metas_completed(id_user, streak, metas, metas_pro)
 
 
-def response_done_list(message, user_name):
+def response_done_list(message, id_user):
     """
     response_metas_complete
     """
-    return filter_done_list(message, user_name)
+    return filter_done_list(message, id_user)
 
 

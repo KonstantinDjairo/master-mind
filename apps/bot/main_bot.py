@@ -7,7 +7,8 @@ from telegram.ext import (CallbackContext, CommandHandler, Filters,
                           MessageHandler, Updater)
 
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
 )
 logger = logging.getLogger(__name__)
 
@@ -29,16 +30,16 @@ def help_command(update: Update, context: CallbackContext) -> None:
 def response(update: Update, context: CallbackContext) -> None:
     """ resonse the user message."""
     message = update.message.text
-    username = update.effective_user.username
-
+    user_name = update.effective_user.username
+    id_user = update.effective_user.id
     if "/c" in message:
-        text = create(message, username)
+        text = create(message, user_name, id_user)
         update.message.reply_text(text)
     elif "/t" in message:
-        text = task_box(message, username)
+        text = task_box(message, user_name, id_user)
         update.message.reply_text(text)
     elif "/d" in message:
-        text = done_list(message, username)
+        text = done_list(message, user_name, id_user)
         update.message.reply_text(text)
     else:
         update.message.reply_text("Comando não existe")
@@ -56,7 +57,8 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("help", help_command))
 
     # on commands
-    dispatcher.add_handler(MessageHandler(Filters.text & Filters.command, response))
+    dispatcher.add_handler(MessageHandler(Filters.text & Filters.command,
+                                          response))
 
     updater.start_polling()
     updater.idle()

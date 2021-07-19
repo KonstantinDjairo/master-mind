@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from ..bot.models import MetasCompleted, Profile
+from ..bot.models import DoneList, Profile
 
 
 def index(request):
     #user = Profile.objects.all()
-    result = MetasCompleted.objects.all()
+    result = DoneList.objects.all()
     
     return render(request, "index/index.html",{"result": result})
 

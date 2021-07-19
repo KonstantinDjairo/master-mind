@@ -1,9 +1,9 @@
 from django.utils import timezone
 
-from apps.bot.models import MetasIncomplete, Edition, Profile, MetasCompleted
+from apps.bot.models import TaskBox, Edition, Profile, DoneList
 
 
-def check_done_list_exists(user_name):
+def check_done_list_exists(id_user):
     current_data = timezone.now()
     current_data = current_data.strftime('%d/%m/%Y')
 
@@ -11,19 +11,18 @@ def check_done_list_exists(user_name):
     if not edition:
         return False
 
-    user_name = Profile.objects.filter(user_name=user_name).first()
+    profile = Profile.objects.filter(id_user=id_user).first()
 
-    metas_incomplete = MetasIncomplete.objects.filter(user_name=user_name.pk,
-                                                      edition=edition.pk).last()
-    metas_complete = MetasCompleted.objects.filter(user_name=user_name.pk,
-                                                   edition=edition.pk).last()
-    if not metas_incomplete:
-
+    task_box = TaskBox.objects.filter(user_name=profile.pk,
+                                      edition=edition.pk).last()
+    done_list = DoneList.objects.filter(user_name=profile.pk,
+                                        edition=edition.pk).last()
+    if not task_box:
         return False
-    if not metas_complete:
+    if not done_list:
         return False
 
-    data_complete = metas_complete.updated.strftime('%d/%m/%Y')
+    data_complete = done_list.updated.strftime('%d/%m/%Y')
     print(data_complete + " - " + current_data)
     if data_complete == current_data:
         return True
