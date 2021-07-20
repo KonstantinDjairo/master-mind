@@ -1,7 +1,7 @@
 import re
 
 from apps.bot.bot_telegram.services.done_list.done_list import\
-    add_metas_completed
+    add_metas_done_list
 
 
 def filter_done_list(message, id_user):
@@ -35,13 +35,9 @@ def filter_done_list(message, id_user):
     else:
         return False
 
-    return add_metas_completed(id_user, streak, metas, metas_pro)
+    return add_metas_done_list(id_user, streak, metas, metas_pro)
 
 
-def response_done_list(message, id_user):
-    """
-    response_metas_complete
-    """
-    return filter_done_list(message, id_user)
+
 
 

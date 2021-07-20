@@ -1,10 +1,11 @@
 from apps.bot.bot_telegram.message_filters.filter_done_list import \
-    response_done_list
+    filter_done_list
 from apps.bot.bot_telegram.message_filters.filter_task_box import\
-    response_task_box
+    filter_task_box
 from apps.bot.bot_telegram.services.profile.check_profile import \
     check_profile_exists, check_profile_active, check_time_task_box
-from apps.bot.bot_telegram.services.profile.create_profile import create_profile
+from apps.bot.bot_telegram.services.profile.create_profile import \
+    create_profile
 from apps.bot.bot_telegram.services.done_list.check_done_list import\
     check_done_list_exists
 from apps.bot.bot_telegram.services.task_box.check_task_bot import \
@@ -38,7 +39,7 @@ def task_box(message, user_name, id_user):
     if not check_profile_exists(id_user):
         return "User não existe \n/c 🤝"
 
-    elif not check_time_task_box():
+    elif check_time_task_box():
         return "Ja passou das 10 horas"
 
     elif not check_profile_active(id_user):
@@ -50,7 +51,7 @@ def task_box(message, user_name, id_user):
     elif check_task_exists(id_user):
         return "Você ja adicionou task box hoje"
 
-    elif response_task_box(message, id_user):
+    elif filter_task_box(message, id_user):
         return f"Tudo OK:\nParabens: {user_name}"
 
     else:
@@ -76,8 +77,9 @@ def done_list(message, user_name, id_user):
     elif check_done_list_exists(id_user):
         return "Você ja adicionou done_list hoje "
 
-    elif response_done_list(message, id_user):
+    elif filter_done_list(message, id_user):
         return f"Tudo OK:\nParabens: {user_name}"
+
     else:
         return "ERRO!!! Done List, fale com o ADM!!!"
 

@@ -17,7 +17,7 @@ class Profile(models.Model):
 
 
 class Level(models.Model):
-    title = models.CharField(max_length=100, null=False, default='Level')
+    title = models.CharField(max_length=100, null=False, default='Level 1')
     description = models.TextField(default="Description....")
     number = models.IntegerField(null=False, blank=False, unique=True, auto_created=True)
     points = models.IntegerField(null=False, blank=False, default=0)

@@ -8,7 +8,7 @@ def filter_task_box(message, id_user):
         ⏱
         é isso ai
         :param message:
-        :param user_name:
+        :param id_user:
         :return: lista
     """
     global metas_pro, start
@@ -29,8 +29,3 @@ def filter_task_box(message, id_user):
     return add_metas_task_box(id_user, metas, metas_pro)
 
 
-def response_task_box(message, id_user):
-    """
-    response_metas_incomplete
-    """
-    return filter_task_box(message, id_user)
