@@ -70,7 +70,7 @@ def done_list(message, user_name, id_user):
     elif not edition_active():
         return "Não a nenhuma edição ativa"
 
-    elif not check_task_exists(user_name):
+    elif not check_task_exists(id_user):
         return "Você não adicionou a task box de hoje "
 
     elif check_done_list_exists(id_user):

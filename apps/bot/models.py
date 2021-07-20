@@ -6,7 +6,7 @@ class Profile(models.Model):
     id_user = models.IntegerField(null=False, unique=True)
     first_name = models.CharField(max_length=100, blank=True, default="...")
     last_name = models.CharField(max_length=100, blank=True, default="...")
-    icon = models.CharField(max_length=2, blank=True, default="🙂")
+    icon = models.CharField(max_length=10, blank=True, default="🙂")
     
     active = models.BooleanField(null=False, default=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -14,6 +14,19 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user_name
+
+
+class Level(models.Model):
+    title = models.CharField(max_length=100, null=False, default='Level')
+    description = models.TextField(default="Description....")
+    number = models.IntegerField(null=False, blank=False, unique=True, auto_created=True)
+    points = models.IntegerField(null=False, blank=False, default=0)
+    metas = models.IntegerField(blank=True, default=1)
+    metas_pro = models.IntegerField(blank=True, default=1)
+    prestige = models.BooleanField(null=False, default=False)
+
+    def __str__(self):
+        return str(self.number)
 
 
 class Edition(models.Model):

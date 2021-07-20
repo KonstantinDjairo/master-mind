@@ -13,9 +13,9 @@ def check_done_list_exists(id_user):
 
     profile = Profile.objects.filter(id_user=id_user).first()
 
-    task_box = TaskBox.objects.filter(user_name=profile.pk,
+    task_box = TaskBox.objects.filter(id_user=profile.pk,
                                       edition=edition.pk).last()
-    done_list = DoneList.objects.filter(user_name=profile.pk,
+    done_list = DoneList.objects.filter(id_user=profile.pk,
                                         edition=edition.pk).last()
     if not task_box:
         return False

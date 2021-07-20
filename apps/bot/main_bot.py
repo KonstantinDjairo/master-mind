@@ -32,6 +32,7 @@ def response(update: Update, context: CallbackContext) -> None:
     message = update.message.text
     user_name = update.effective_user.username
     id_user = update.effective_user.id
+
     if "/c" in message:
         text = create(message, user_name, id_user)
         update.message.reply_text(text)

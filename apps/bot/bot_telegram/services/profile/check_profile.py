@@ -4,7 +4,7 @@ from apps.bot.models import Profile
 
 
 def check_profile_exists(id_user):
-    profile_exists = Profile.objects.filter(id_user=id_user)
+    profile_exists = Profile.objects.filter(id_user=id_user).last()
     if profile_exists:
         return True
     else:
@@ -13,10 +13,9 @@ def check_profile_exists(id_user):
 
 def check_time_task_box():
     time_str = timezone.now()
-    time = int(time_str.strftime('%H'))
+    time = int(time_str.strftime("%H"))
 
-    # if time < 10
-    if time > 10:
+    if time > 11:
         return True
     else:
         return False
@@ -30,7 +29,7 @@ def check_metas(metas_exists, metas, metas_pro):
 
 
 def check_profile_active(id_user):
-    profile = Profile.objects.filter(id_user=id_user).first()
+    profile = Profile.objects.filter(id_user=id_user).last()
     if profile.active:
         return True
     else:
@@ -38,8 +37,8 @@ def check_profile_active(id_user):
 
 
 def chek_profile(id_user):
-    profile = check_profile_exists(id_user)
-    if profile:
+    profile = check_profile_exists(id_user).last()
+    if profile.pk:
         return True
     else:
         return False

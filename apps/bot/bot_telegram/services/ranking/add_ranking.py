@@ -1,12 +1,12 @@
 from apps.bot.models import Edition, Profile, DoneList, Ranking
 
 
-def create_ranking(profile, points_metas, edition, metas, metas_pro):
+def create_ranking(profile, done_list, edition, metas, metas_pro):
     """
     create_ranking
     """
     try:
-        points_user = points_metas.metas + points_metas.metas_pro
+        points_user = (done_list.metas / 10) + (done_list.metas_pro / 10)
         instance = Ranking.objects.create(id_user=profile, points=points_user,
                                           metas=metas, metas_pro=metas_pro)
         instance.edition.add(edition)
@@ -16,11 +16,13 @@ def create_ranking(profile, points_metas, edition, metas, metas_pro):
         return False
 
 
-def update_ranking(profile, points_metas, edition, metas, metas_pro):
+def update_ranking(profile, done_list, edition, metas, metas_pro):
     """
     update_ranking
     """
-    points_user = points_metas.metas + points_metas.metas_pro
+    metas_done_list = done_list.metas / 10
+    metas_pro_list = done_list.metas_pro / 10
+    points_user = metas_done_list + metas_pro_list
     try:
         ranking = Ranking.objects.filter(pk=profile.pk, edition=edition.pk).last()
         ranking.points = ranking.points + points_user
@@ -35,17 +37,21 @@ def update_ranking(profile, points_metas, edition, metas, metas_pro):
 
 def ranking_conf(id_user, metas, metas_pro):
     edition = Edition.objects.filter(active=True).last()
-    profile = Profile.objects.filter(id_user=id_user).first()
+    profile = Profile.objects.filter(id_user=id_user).last()
+
     if not edition or not profile:
         return False
 
-    points_metas = DoneList.objects.filter(id_user=profile.pk,
-                                           edition=edition).last()
+    done_list = DoneList.objects.filter(id_user=profile.pk,
+                                        edition=edition).last()
 
     ranking = Ranking.objects.filter(id_user=profile.pk,
                                      edition=edition).last()
 
+    metas = metas / 10
+    metas_pro = metas_pro / 10
+
     if ranking:
-        return update_ranking(profile, points_metas, edition, metas, metas_pro)
+        return update_ranking(profile, done_list, edition, metas, metas_pro)
     else:
-        return create_ranking(profile, points_metas, edition, metas, metas_pro)
+        return create_ranking(profile, done_list, edition, metas, metas_pro)
