@@ -4,7 +4,7 @@ from apps.bot.models import DoneList, Edition, Profile
 
 def create_done_list_true(id_user, streak, metas, metas_pro):
     """
-    def create_done_list_true(id_user, streak, metas, metas_pro):
+    create done list_true(id_user, streak, metas, metas_pro):
 
     """
     edition = Edition.objects.filter(active=True).last()

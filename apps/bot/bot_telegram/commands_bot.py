@@ -53,7 +53,7 @@ def task_box(message, user_name, id_user):
         return "Você ja adicionou task box hoje"
 
     elif check_level(message, id_user):
-        return "Tem mais task do que seu nivel permite"
+        return "ERRO!!! Tem mais task do que seu nivel permite"
 
     elif filter_task_box(message, id_user):
         return f"Tudo OK:\nParabens: {user_name}"
@@ -70,16 +70,16 @@ def done_list(message, user_name, id_user):
         return "User não existe \n/c 🤝"
 
     elif not check_profile_active(id_user):
-        return "Bloqueado"
+        return "ERRO!!! Bloqueado"
 
     elif not edition_active():
-        return "Não a nenhuma edição ativa"
+        return "ERRO!!! Não a nenhuma edição ativa"
 
     elif not check_task_exists(id_user):
-        return "Você não adicionou a task box de hoje "
+        return "ERRO!!! Você não adicionou a task box de hoje "
 
     elif check_done_list_exists(id_user):
-        return "Você ja adicionou done_list hoje "
+        return "ERRO!!! Você ja adicionou done_list hoje "
 
     elif check_done(message, id_user):
         return "Não pode ter mais metas compridas do que vc colocou na Task Box"
