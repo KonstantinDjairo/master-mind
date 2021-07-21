@@ -26,7 +26,7 @@ class Level(models.Model):
     prestige = models.BooleanField(null=False, default=False)
 
     def __str__(self):
-        return str(self.number)
+        return str(self.title)
 
 
 class Edition(models.Model):
@@ -53,7 +53,7 @@ class Ranking(models.Model):
     id_user = models.ForeignKey(Profile, on_delete=models.PROTECT)
     edition = models.ManyToManyField(Edition)
 
-    points = models.IntegerField(null=False, blank=False, default=0)
+    points = models.FloatField(null=False, blank=False, default=0)
     metas = models.FloatField(blank=True, default=0)
     metas_pro = models.FloatField(blank=True, default=0)
 

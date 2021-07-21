@@ -7,26 +7,49 @@ from apps.bot.bot_telegram.services.done_list.done_list_create import \
 from apps.bot.models import DoneList, Profile, TaskBox, Edition
 
 
+def add_create_done_list(streak, metas, metas_pro, metas_ok, id_user):
+
+    try:
+        edition = Edition.objects.filter(active=True).last()
+        profile = Profile.objects.filter(id_user=id_user).last()
+        if metas_ok:
+            DoneList.objects.create(id_user=profile, metas=metas,
+                                    metas_pro=metas_pro, streak=streak,
+                                    streak_count=1, streak_max=1,
+                                    edition=edition)
+        else:
+            DoneList.objects.create(id_user=profile, metas=metas,
+                                    metas_pro=metas_pro, streak=streak,
+                                    streak_count=0,streak_max=0,
+                                    edition=edition)
+        return ranking_conf(id_user, metas, metas_pro)
+    except ValueError as e:
+        print(f"Erro add_create_done_list: {e}")
+        return False
+
+
 def add_done_list(metas_user, streak, metas, metas_pro, metas_ok, id_user):
     done_list = DoneList.objects.get(pk=metas_user.pk)
     edition = Edition.objects.filter(active=True).last()
 
-    if metas_ok:
-        done_list.metas = metas_user.metas + metas
-        done_list.metas_pro = metas_user.metas_pro + metas_pro
-        done_list.streak_count += 1
-        done_list.streak = streak
-        done_list.streak_max += 1
-        done_list.edition = edition
-        done_list.save()
+    if edition.pk == done_list.edition:
+        if metas_ok:
+            done_list.metas = metas_user.metas + metas
+            done_list.metas_pro = metas_user.metas_pro + metas_pro
+            done_list.streak_count += 1
+            done_list.streak = streak
+            done_list.streak_max += 1
+            done_list.edition = edition
+            done_list.save()
+        else:
+            done_list.metas = metas_user.metas + metas
+            done_list.metas_pro = metas_user.metas_pro + metas_pro
+            done_list.streak_count = 0
+            done_list.streak = False
+            done_list.edition = edition
+            done_list.save()
     else:
-        done_list.metas = metas_user.metas + metas
-        done_list.metas_pro = metas_user.metas_pro + metas_pro
-        done_list.streak_count = 0
-        done_list.streak = False
-        done_list.edition = edition
-        done_list.save()
-
+        pass
     return ranking_conf(id_user, metas, metas_pro)
 
 

@@ -24,8 +24,9 @@ def create_done_list_false(id_user, streak, metas, metas_pro):
     """
     create_done_list_false
     """
-    edition = Edition.objects.filter(active=True).last()
     try:
+        edition = Edition.objects.filter(active=True).last()
+        profile = Profile.objects.filter(id_user=id_user).last()
         DoneList.objects.create(id_user=profile, metas=metas,
                                 metas_pro=metas_pro, streak=streak,
                                 streak_count=0, streak_max=0,

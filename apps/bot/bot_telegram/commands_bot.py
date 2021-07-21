@@ -1,5 +1,5 @@
 from apps.bot.bot_telegram.message_filters.filter_done_list import \
-    filter_done_list
+    filter_done_list, check_done
 from apps.bot.bot_telegram.message_filters.filter_task_box import\
     filter_task_box
 from apps.bot.bot_telegram.services.profile.check_profile import \
@@ -12,6 +12,7 @@ from apps.bot.bot_telegram.services.task_box.check_task_bot import \
     check_task_exists
 from apps.bot.bot_telegram.services.edition.check_edition_active import \
     edition_active
+from apps.bot.bot_telegram.services.level.filter_task import check_level
 
 
 def create(message, user_name, id_user):
@@ -51,6 +52,9 @@ def task_box(message, user_name, id_user):
     elif check_task_exists(id_user):
         return "Você ja adicionou task box hoje"
 
+    elif check_level(message, id_user):
+        return "Tem mais task do que seu nivel permite"
+
     elif filter_task_box(message, id_user):
         return f"Tudo OK:\nParabens: {user_name}"
 
@@ -63,10 +67,10 @@ def done_list(message, user_name, id_user):
     create a done list , with the message and the user
     """
     if not check_profile_exists(id_user):
-        return "User não existe"
+        return "User não existe \n/c 🤝"
 
     elif not check_profile_active(id_user):
-        return "User Bloqueado"
+        return "Bloqueado"
 
     elif not edition_active():
         return "Não a nenhuma edição ativa"
@@ -77,9 +81,11 @@ def done_list(message, user_name, id_user):
     elif check_done_list_exists(id_user):
         return "Você ja adicionou done_list hoje "
 
+    elif check_done(message, id_user):
+        return "Não pode ter mais metas compridas do que vc colocou na Task Box"
+
     elif filter_done_list(message, id_user):
         return f"Tudo OK:\nParabens: {user_name}"
-
     else:
         return "ERRO!!! Done List, fale com o ADM!!!"
 

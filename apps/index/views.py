@@ -6,6 +6,6 @@ def index(request):
     #user = Profile.objects.all()
     result = DoneList.objects.all()
     
-    return render(request, "index/index.html",{"result": result})
+    return render(request, "index/index.html", {"result": result})
 
 

@@ -44,10 +44,11 @@ def add_metas_task_box(id_user, metas, metas_pro):
     current_data = current_data.strftime('%d/%m/%Y')
     profile = Profile.objects.filter(id_user=id_user).last()
     edition = Edition.objects.filter(active=True).last()
-    task_box = TaskBox.objects.filter(id_user=profile.pk, edition=edition.pk).last()
+    task_box = TaskBox.objects.filter(id_user=profile.pk,
+                                      edition=edition.pk).last()
 
     if not task_box:
         return create_task_box(id_user, metas, metas_pro)
     else:
-        if not current_data == task.updated.strftime('%d/%m/%Y'):
-            return add_task_box(id_user, metas, metas_pro, task.pk)
+        if not current_data == task_box.updated.strftime('%d/%m/%Y'):
+            return add_task_box(id_user, metas, metas_pro, task_box.pk)

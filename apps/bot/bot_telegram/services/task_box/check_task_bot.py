@@ -10,7 +10,7 @@ def check_task_exists(id_user):
     if not edition:
         return False
 
-    profile = Profile.objects.filter(id_user=id_user).first()
+    profile = Profile.objects.filter(id_user=id_user).last()
 
     task_box = TaskBox.objects.filter(id_user=profile.pk,
                                       edition=edition.pk).last()
