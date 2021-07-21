@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.signals import post_save, pre_delete
 
 
 class Profile(models.Model):
@@ -17,7 +18,7 @@ class Profile(models.Model):
 
 
 class Level(models.Model):
-    title = models.CharField(max_length=100, null=False, default='Level 1')
+    title = models.CharField(max_length=100, null=False, default='Nvl 0. Legionário')
     description = models.TextField(default="Description....")
     number = models.IntegerField(null=False, blank=False, unique=True, auto_created=True)
     points = models.IntegerField(null=False, blank=False, default=0)
@@ -30,7 +31,7 @@ class Level(models.Model):
 
 
 class Edition(models.Model):
-    title = models.CharField(max_length=100, null=False, default='Edition')
+    title = models.CharField(max_length=100, null=False, default='Edition 1')
     description = models.TextField(default="Description....")
 
     number = models.IntegerField(null=False, blank=False, unique=True, auto_created=True)
@@ -49,8 +50,17 @@ class Edition(models.Model):
         return str(self.title)
 
 
+class LevelUser(models.Model):
+    id_user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    level = models.ForeignKey(Level, on_delete=models.CASCADE)
+    check = models.BooleanField(blank=False, default=False)
+
+    def __str__(self):
+        return f"{self.id_user} - {self.level}"
+
+
 class Ranking(models.Model):
-    id_user = models.ForeignKey(Profile, on_delete=models.PROTECT)
+    id_user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     edition = models.ManyToManyField(Edition)
 
     points = models.FloatField(null=False, blank=False, default=0)
@@ -68,8 +78,8 @@ class Ranking(models.Model):
 
     
 class DoneList(models.Model):
-    id_user = models.ForeignKey(Profile, on_delete=models.PROTECT)
-    edition = models.ForeignKey(Edition, on_delete=models.PROTECT)
+    id_user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    edition = models.ForeignKey(Edition, on_delete=models.CASCADE)
 
     metas = models.FloatField(blank=True, default=0)
     metas_pro = models.FloatField(blank=True, default=0)
@@ -86,8 +96,8 @@ class DoneList(models.Model):
 
     
 class TaskBox(models.Model):
-    id_user = models.ForeignKey(Profile, on_delete=models.PROTECT)
-    edition = models.ForeignKey(Edition, on_delete=models.PROTECT)
+    id_user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    edition = models.ForeignKey(Edition, on_delete=models.CASCADE)
       
     metas = models.FloatField(blank=True, default=0)
     metas_pro = models.FloatField(blank=True, default=0)

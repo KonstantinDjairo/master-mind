@@ -20,7 +20,7 @@ def add_create_done_list(streak, metas, metas_pro, metas_ok, id_user):
         else:
             DoneList.objects.create(id_user=profile, metas=metas,
                                     metas_pro=metas_pro, streak=streak,
-                                    streak_count=0,streak_max=0,
+                                    streak_count=0, streak_max=0,
                                     edition=edition)
         return ranking_conf(id_user, metas, metas_pro)
     except ValueError as e:

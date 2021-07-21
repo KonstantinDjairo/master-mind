@@ -9,11 +9,10 @@ def check_level(message, id_user):
         !!!!
     """
     global metas_pro, start, metas, level_user, number
+    points = 0
 
     profile = Profile.objects.filter(id_user=id_user).last()
-    edition = Edition.objects.filter(active=True).last()
-    ranking = Ranking.objects.filter(id_user=profile.pk,
-                                     edition=edition.pk).last()
+    ranking = Ranking.objects.filter(id_user=profile.pk)
     level = Level.objects.all()
 
     if "ProMode" in message:
@@ -28,8 +27,11 @@ def check_level(message, id_user):
         metas_list = re.findall("⏱", message[0:start])
         metas = len(metas_list)
 
+    for _ in ranking:
+        points += _.points
+
     for _ in level:
-        if ranking.points < _.points >= ranking.points:
+        if points < _.points >= points:
             number = _.number
             break
 

@@ -13,6 +13,7 @@ from apps.bot.bot_telegram.services.task_box.check_task_bot import \
 from apps.bot.bot_telegram.services.edition.check_edition_active import \
     edition_active
 from apps.bot.bot_telegram.services.level.filter_task import check_level
+from apps.bot.bot_telegram.services.level.level_up import level_check_up
 
 
 def create(message, user_name, id_user):
@@ -40,8 +41,8 @@ def task_box(message, user_name, id_user):
     if not check_profile_exists(id_user):
         return "User não existe \n/c 🤝"
 
-    elif check_time_task_box():
-        return "Ja passou das 10 horas"
+    #elif check_time_task_box():
+    #    return "Ja passou das 10 horas"
 
     elif not check_profile_active(id_user):
         return "User Bloqueado"
@@ -70,7 +71,7 @@ def done_list(message, user_name, id_user):
         return "User não existe \n/c 🤝"
 
     elif not check_profile_active(id_user):
-        return "ERRO!!! Bloqueado"
+        return f"ERRO!!! Bloqueado {user_name}"
 
     elif not edition_active():
         return "ERRO!!! Não a nenhuma edição ativa"
@@ -85,7 +86,9 @@ def done_list(message, user_name, id_user):
         return "Não pode ter mais metas compridas do que vc colocou na Task Box"
 
     elif filter_done_list(message, id_user):
-        return f"Tudo OK:\nParabens: {user_name}"
+        # vai dar uma resposta pro usuario
+        return level_check_up(id_user)
+
     else:
         return "ERRO!!! Done List, fale com o ADM!!!"
 

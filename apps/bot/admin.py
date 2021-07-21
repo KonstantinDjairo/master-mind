@@ -1,6 +1,6 @@
 from django.contrib import admin
 from apps.bot.models import DoneList, TaskBox, Profile, Ranking,\
-    Edition, Level
+    Edition, Level, LevelUser
 
 # Register your models here.
 
@@ -10,5 +10,5 @@ admin.site.register(Edition)
 admin.site.register(Level)
 admin.site.register(DoneList)
 admin.site.register(TaskBox)
-
+admin.site.register(LevelUser)
 
