@@ -52,8 +52,8 @@ class Edition(models.Model):
 class LevelUser(models.Model):
     id_user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     level = models.ForeignKey(Level, on_delete=models.CASCADE)
-    check = models.BooleanField(blank=False, default=False)
     prestige = models.BooleanField(null=False, default=False)
+    prestige_level = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.id_user} - {self.level}"
@@ -74,7 +74,7 @@ class Ranking(models.Model):
         ordering = ["-points"]
 
     def __str__(self):
-        return str(self.id_user)
+        return f"{str(self.id_user)} - {self.points}"
 
     
 class DoneList(models.Model):
