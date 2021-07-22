@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.signals import post_save, pre_delete
 
 
 class Profile(models.Model):
@@ -47,13 +46,14 @@ class Edition(models.Model):
         ordering = ["-number"]
 
     def __str__(self):
-        return str(self.title)
+        return f"{str(self.title)} - {self.number}"
 
 
 class LevelUser(models.Model):
     id_user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     level = models.ForeignKey(Level, on_delete=models.CASCADE)
     check = models.BooleanField(blank=False, default=False)
+    prestige = models.BooleanField(null=False, default=False)
 
     def __str__(self):
         return f"{self.id_user} - {self.level}"
@@ -106,7 +106,7 @@ class TaskBox(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.id_user)
+        return f"{str(self.id_user)} - {str(self.edition)}"
     
 
 

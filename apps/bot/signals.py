@@ -13,3 +13,4 @@ def create_level_user(sender, instance, created, **kwargs):
 
 
 post_save.connect(create_level_user, sender=Profile)
+
