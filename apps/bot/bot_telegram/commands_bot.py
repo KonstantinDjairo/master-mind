@@ -1,12 +1,12 @@
 from apps.bot.bot_telegram.message_filters.filter_done_list import \
     filter_done_list, check_done
-from apps.bot.bot_telegram.message_filters.filter_task_box import\
-    filter_task_box
+from apps.bot.bot_telegram.message_filters.filter_task_box import \
+    task_box_list
 from apps.bot.bot_telegram.services.profile.check_profile import \
     check_profile_exists, check_profile_active, check_time_task_box
 from apps.bot.bot_telegram.services.profile.create_profile import \
     create_profile
-from apps.bot.bot_telegram.services.done_list.check_done_list import\
+from apps.bot.bot_telegram.services.done_list.check_done_list import \
     check_done_list_exists
 from apps.bot.bot_telegram.services.task_box.check_task_bot import \
     check_task_exists
@@ -41,7 +41,7 @@ def task_box(message, user_name, id_user):
     if not check_profile_exists(id_user):
         return "User não existe \n/c 🤝"
 
-    #elif check_time_task_box():
+    # elif check_time_task_box():
     #    return "Ja passou das 10 horas"
 
     elif not check_profile_active(id_user):
@@ -52,13 +52,11 @@ def task_box(message, user_name, id_user):
 
     elif check_task_exists(id_user):
         return "Você ja adicionou task box hoje"
-
+    # RS
+    elif not check_level(message, id_user):
+        return task_box_list(message, id_user)
     elif check_level(message, id_user):
         return "ERRO!!! Tem mais task do que seu nivel permite"
-
-    elif filter_task_box(message, id_user):
-        return f"Tudo OK:\nParabens: {user_name}"
-
     else:
         return f"ERRO!!! Task box, fale com o ADM!!!"
 
@@ -79,7 +77,7 @@ def done_list(message, user_name, id_user):
     elif not check_task_exists(id_user):
         return "ERRO!!! Você não adicionou a task box de hoje "
 
-    #elif check_done_list_exists(id_user):
+    # elif check_done_list_exists(id_user):
     #    return "ERRO!!! Você ja adicionou done_list hoje "
 
     elif check_done(message, id_user):
@@ -91,5 +89,3 @@ def done_list(message, user_name, id_user):
 
     else:
         return "ERRO!!! Done List, fale com o ADM!!!"
-
-

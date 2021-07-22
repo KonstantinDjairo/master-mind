@@ -14,7 +14,7 @@ def filter_done_list(message, id_user):
         :return: boolean
     """
     streak = True
-    global metas_pro, metas_pro_x, start
+    global metas_pro, metas_pro_x, start, metas
     if "ProMode" in message:
         pro_mode = re.search(r"ProMode", message)
         start = pro_mode.start()
@@ -33,8 +33,6 @@ def filter_done_list(message, id_user):
     if "Metas" in message:
         metas_list = re.findall("✅", message[0:start])
         metas = len(metas_list)
-    else:
-        return False
 
     return add_metas_done_list(id_user, streak, metas, metas_pro)
 
