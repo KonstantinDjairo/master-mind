@@ -28,6 +28,9 @@ class Level(models.Model):
     def __str__(self):
         return str(self.title)
 
+    class Meta:
+        ordering = ["-number"]
+
 
 class Edition(models.Model):
     title = models.CharField(max_length=100, null=False, default='Edition 1')
@@ -52,6 +55,7 @@ class Edition(models.Model):
 class LevelUser(models.Model):
     id_user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     level = models.ForeignKey(Level, on_delete=models.CASCADE)
+    number = models.IntegerField(null=False, blank=False, default=0)
     prestige = models.BooleanField(null=False, default=False)
     prestige_level = models.IntegerField(null=True, blank=True)
 

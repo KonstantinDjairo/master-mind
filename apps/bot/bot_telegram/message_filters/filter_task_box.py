@@ -30,7 +30,7 @@ def filter_task_box(message):
 
 
 def task_box_list(message, id_user):
-    if "Metas" in message or "⏱" in message:
+    if not "Metas" in message or not "⏱" in message:
         return "A mensagem é invalida, por favor segue a padrao da task box"
 
     lista = filter_task_box(message)
