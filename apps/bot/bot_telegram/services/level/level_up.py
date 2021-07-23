@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from apps.bot.models import Level, DoneList, Ranking, Profile, Edition,\
     LevelUser
 
@@ -39,16 +41,11 @@ def level_check_up(id_user):
     profile = Profile.objects.filter(id_user=id_user).last()
     level_user = LevelUser.objects.filter(id_user=profile.pk).last()
 
-    level_current = level_check(profile.id_user)
-    if not level_current:
-        return f"Parabens {profile.user_name} none"
+    current_data = timezone.now()
+    current_data = current_data.strftime('%d/%m/%Y')
 
-    if level_current > level_user.number:
-        if level_user_To_edit(level_current, profile):
-
-            return f"Parabens {profile.user_name} você pro Nivel {level.number}"
-        else:
-            return "ERRO"
+    if current_data == level_user.updated.strftime('%d/%m/%Y'):
+        return f"Parabens {profile.user_name} você pro Nivel {level.number}"
     else:
         return f"Parabens {profile.user_name}"
 

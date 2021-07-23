@@ -7,11 +7,10 @@ from apps.bot.bot_telegram.services.level.level_up import level_check, level_use
 def create_level_user(sender, instance, created, **kwargs):
     level = Level.objects.filter().first()
     if created:
-        LevelUser.objects.create(id_user=instance, level=level, check=False)
+        LevelUser.objects.create(id_user=instance, level=level)
     else:
         if not hasattr(instance, "profile"):
-            LevelUser.objects.create(id_user=instance, level=level,
-                                     check=False, number=0)
+            LevelUser.objects.create(id_user=instance, level=level, number=0)
 
 
 def update_level(sender, instance, created, **kwargs):

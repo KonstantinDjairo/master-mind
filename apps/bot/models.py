@@ -59,6 +59,9 @@ class LevelUser(models.Model):
     prestige = models.BooleanField(null=False, default=False)
     prestige_level = models.IntegerField(null=True, blank=True)
 
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return f"{self.id_user} - {self.level}"
 
