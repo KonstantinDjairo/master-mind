@@ -17,20 +17,21 @@ def check_level(message, id_user):
     level = Level.objects.all()
 
     lista = filter_task_box(message)
+
     metas = lista[0]["metas"]
     metas_pro = lista[0]["metas_pro"]
 
     for _ in ranking:
-        points += _.points
+        points = points + _.points
 
     for _ in level:
         if points < _.points >= points:
             number = _.number
             break
 
-    level = Level.objects.filter(number=number-1).last()
+    level = Level.objects.filter(number=number).first()
 
-    if metas > level.metas or metas_pro > level.metas_pro:
+    if not level.metas >= metas and level.metas_pro >= metas_pro:
         return True
     else:
         return False

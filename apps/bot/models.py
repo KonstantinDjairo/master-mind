@@ -6,7 +6,7 @@ class Profile(models.Model):
     id_user = models.IntegerField(null=False, unique=True)
     first_name = models.CharField(max_length=100, blank=True, default="...")
     last_name = models.CharField(max_length=100, blank=True, default="...")
-    icon = models.CharField(max_length=10, blank=True, default="🙂")
+    icon = models.CharField(max_length=10, blank=True, default="🙂", null=True)
     
     active = models.BooleanField(null=False, default=True)
     created = models.DateTimeField(auto_now_add=True)

@@ -7,6 +7,7 @@ def filter_emoji(message):
     """
     regex to filter the emoji
     """
+
     try:
         icon = re.sub('\/c ', "", message)
 
@@ -15,7 +16,7 @@ def filter_emoji(message):
 
     except ValueError as e:
         print(f"ERRO, filter_emoji: {e}")
-        return "🌏"
+        return None
 
 
 def create_profile(message, user_name, id_user):
@@ -24,8 +25,12 @@ def create_profile(message, user_name, id_user):
     """
     try:
         icon = filter_emoji(message)
-        Profile.objects.create(id_user=id_user, user_name=user_name, icon=icon)
-        return True
+        if not icon:
+            Profile.objects.create(id_user=id_user, user_name=user_name, icon=icon)
+            return True
+        else:
+            Profile.objects.create(id_user=id_user, user_name=user_name)
+            return True
     except ValueError as e:
         print(f"ERRO, create_profile: {e}")
         return False
