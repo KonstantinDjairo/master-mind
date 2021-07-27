@@ -41,11 +41,25 @@ def level_check_up(id_user):
     profile = Profile.objects.filter(id_user=id_user).last()
     level_user = LevelUser.objects.filter(id_user=profile.pk).last()
 
+    level = Level.objects.filter(pk=level_user.level).last()
     current_data = timezone.now()
     current_data = current_data.strftime('%d/%m/%Y')
 
     if current_data == level_user.updated.strftime('%d/%m/%Y'):
-        return f"Parabens {profile.user_name} você pro Nivel {level.number}"
+        return f""" 🔥 Parabéns ao Guerreiro que subiU de nível! 
+😁:User
+___
+{level.title}:
++1 Meta
++1 ProMode
+
+⚔️:{profile.user_name}
+_
+
+👉🏻 Vocês poderão adicionar as suas novas atribuições a partir do próximo envio da TaskBox.
+_
+"""
     else:
         return f"Parabens {profile.user_name}"
+
 

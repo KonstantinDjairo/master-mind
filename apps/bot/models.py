@@ -32,6 +32,20 @@ class Level(models.Model):
         ordering = ["-number"]
 
 
+class LevelUser(models.Model):
+    id_user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    level = models.ForeignKey(Level, on_delete=models.CASCADE)
+    number = models.IntegerField(null=False, blank=False, default=0)
+    prestige = models.BooleanField(null=False, default=False)
+    prestige_level = models.IntegerField(null=True, blank=True)
+
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.id_user} - {self.level}"
+
+
 class Edition(models.Model):
     title = models.CharField(max_length=100, null=False, default='Edition 1')
     description = models.TextField(default="Description....")
@@ -50,20 +64,6 @@ class Edition(models.Model):
 
     def __str__(self):
         return f"{str(self.title)} - {self.number}"
-
-
-class LevelUser(models.Model):
-    id_user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    level = models.ForeignKey(Level, on_delete=models.CASCADE)
-    number = models.IntegerField(null=False, blank=False, default=0)
-    prestige = models.BooleanField(null=False, default=False)
-    prestige_level = models.IntegerField(null=True, blank=True)
-
-    updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.id_user} - {self.level}"
 
 
 class Ranking(models.Model):

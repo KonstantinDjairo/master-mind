@@ -13,6 +13,7 @@ def create_done_list_true(id_user, streak, metas, metas_pro, edition, profile):
                                 metas_pro=metas_pro, streak=streak,
                                 streak_count=1, streak_max=1,
                                 edition=edition)
+        metas = metas + 1
         return ranking_conf(id_user, metas, metas_pro)
     except ValueError as e:
         print(f"Erro create_done_list_true: {e}")

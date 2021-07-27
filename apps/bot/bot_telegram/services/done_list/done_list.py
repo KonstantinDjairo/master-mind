@@ -31,6 +31,8 @@ def add_done_list_true(id_user, done_list, edition, metas, metas_pro):
         done_list.streak_max += 1
         done_list.edition = edition
         done_list.save()
+
+        metas = metas + 1
         return ranking_conf(id_user, metas, metas_pro)
     except ValueError as e:
         print(f"Erro add_done_list_false: {e}")

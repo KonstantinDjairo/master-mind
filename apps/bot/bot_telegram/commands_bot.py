@@ -52,9 +52,10 @@ def task_box(message, user_name, id_user):
 
     elif check_task_exists(id_user):
         return "Você ja adicionou task box hoje"
-    # RS
+
     elif not check_level(message, id_user):
         return task_box_list(message, id_user)
+
     elif check_level(message, id_user):
         return "ERRO!!! Tem mais task do que seu nivel permite"
     else:
