@@ -1,7 +1,5 @@
 from django.utils import timezone
 
-from apps.bot.bot_telegram.services.profile.check_profile import \
-    check_time_task_box
 from apps.bot.models import TaskBox, Profile, Edition
 
 

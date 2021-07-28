@@ -2,7 +2,7 @@
 #import traceback
 
 from apps.bot.bot_telegram.services.ranking.add_ranking import ranking_conf
-from apps.bot.models import DoneList, Edition, Profile
+from apps.bot.models import DoneList
 
 
 def create_done_list_true(id_user, streak, metas, metas_pro, edition, profile):
