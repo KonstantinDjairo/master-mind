@@ -14,7 +14,7 @@ def create_ranking(profile, done_list, edition, metas, metas_pro):
                                           metas=metas, metas_pro=metas_pro)
         instance.edition.add(edition)
         return True
-    except ValueError as e:
+    except Exception as e:
         print(f"Erro create_ranking: {e}")
         return False
 
@@ -37,7 +37,7 @@ def update_ranking(profile, done_list, edition, metas, metas_pro):
         ranking.metas_pro = ranking.metas_pro + metas_pro
         ranking.save()
         return True
-    except ValueError as e:
+    except Exception as e:
         print(f"Erro update_ranking: {e}")
         return False
 

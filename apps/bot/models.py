@@ -25,11 +25,11 @@ class Level(models.Model):
     metas_pro = models.IntegerField(blank=True, default=1)
     prestige = models.BooleanField(null=False, default=False)
 
-    def __str__(self):
-        return str(self.title)
-
     class Meta:
         ordering = ["-number"]
+
+    def __str__(self):
+        return str(self.title)
 
 
 class LevelUser(models.Model):

@@ -13,10 +13,10 @@ class Command(BaseCommand):
         for _ in ranking:
             x = x + _.points
 
-        level = Level.objects.all()
-        x = 0.1
+        level = Level.objects.all().order_by("number")
 
+        points = 100
         for _ in level:
-            if x >= _.points <= x:
-                print(_.title)
-                break
+            if points >= _.points:
+                print(f"{_.title}")
+                # Nvl 2. Centurião   (+10)

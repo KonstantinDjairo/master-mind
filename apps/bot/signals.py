@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save, pre_delete
 
 from apps.bot.models import Level, LevelUser, Profile, Ranking
-from apps.bot.bot_telegram.services.level.level_up import level_check, level_user_to_edit
+from apps.bot.bot_telegram.services.level.level_up import level_check, level_user_to_edit, get_level
 
 
 def create_level_user(sender, instance, created, **kwargs):
@@ -15,15 +15,15 @@ def create_level_user(sender, instance, created, **kwargs):
 
 def update_level(sender, instance, created, **kwargs):
 
-    if not hasattr(instance, "Ranking"):
+    if not hasattr(instance, "ranking"):
         profile = Profile.objects.filter(user_name=instance.id_user).first()
 
-        if not level_check(profile):
+        number = level_check(profile)
+        if not number:
             pass
         else:
-            number = level_check(profile)
-            print(number)
-            level_user_to_edit(number, profile)
+            if number != get_level(profile):
+                level_user_to_edit(number, profile)
 
 
 post_save.connect(create_level_user, sender=Profile)
