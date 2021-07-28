@@ -28,7 +28,7 @@ def help_command(update: Update, context: CallbackContext) -> None:
 
 
 def response(update: Update, context: CallbackContext) -> None:
-    """ resonse the user message."""
+    """ response the user message."""
     message = update.message.text
     user_name = update.effective_user.username
     id_user = update.effective_user.id
@@ -41,6 +41,9 @@ def response(update: Update, context: CallbackContext) -> None:
         update.message.reply_text(text)
     elif "/d" in message:
         text = done_list(message, user_name, id_user)
+        update.message.reply_text(text)
+    elif "/nl" in message:
+        text = level(id_user)
         update.message.reply_text(text)
     else:
         update.message.reply_text("Comando não existe")

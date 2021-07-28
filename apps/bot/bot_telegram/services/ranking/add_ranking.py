@@ -5,11 +5,14 @@ def create_ranking(profile, done_list, edition, metas, metas_pro):
     """
     create_ranking
     """
-    try:
-        points_user = (done_list.metas / 10) + (done_list.metas_pro / 10)
+    points_user = (done_list.metas / 10) + (done_list.metas_pro / 10)
 
-        metas = metas / 10
-        metas_pro = metas_pro / 10
+    metas = metas / 10
+    metas_pro = metas_pro / 10
+    metas = round(metas, 2)
+    metas_pro = round(metas_pro, 2)
+    points_user = round(points_user, 2)
+    try:
         instance = Ranking.objects.create(id_user=profile, points=points_user,
                                           metas=metas, metas_pro=metas_pro)
         instance.edition.add(edition)
@@ -29,9 +32,13 @@ def update_ranking(profile, done_list, edition, metas, metas_pro):
 
     metas = metas / 10
     metas_pro = metas_pro / 10
+    metas = round(metas, 2)
+    metas_pro = round(metas_pro, 2)
+
     try:
         ranking = Ranking.objects.filter(id_user=profile.pk,
                                          edition=edition.pk).last()
+
         ranking.points = ranking.points + points_user
         ranking.metas = ranking.metas + metas
         ranking.metas_pro = ranking.metas_pro + metas_pro

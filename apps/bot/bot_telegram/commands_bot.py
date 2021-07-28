@@ -13,7 +13,8 @@ from apps.bot.bot_telegram.services.task_box.check_task_bot import \
 from apps.bot.bot_telegram.services.edition.check_edition_active import \
     edition_active
 from apps.bot.bot_telegram.services.level.filter_task import check_level
-from apps.bot.bot_telegram.services.level.level_up import level_check_up
+from apps.bot.bot_telegram.services.level.level_up import level_check_up,\
+    get_level_to_id_user
 
 
 def create(message, user_name, id_user):
@@ -91,3 +92,7 @@ def done_list(message, user_name, id_user):
 
     else:
         return "ERRO!!! Done List, fale com o ADM!!!"
+
+
+def level(id_user):
+    return get_level_to_id_user(id_user)

@@ -7,7 +7,6 @@ def add_bonus(profile, edition):
     ranking = Ranking.objects.filter(id_user=profile.pk,
                                      edition=edition).last()
     try:
-        # BONOS DE UM DIA ADD AQUI E NO CRI
         if done_list.streak_count == 7:
             ranking.points = ranking.points + 10
             ranking.save()

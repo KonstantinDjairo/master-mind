@@ -4,7 +4,13 @@ from apps.bot.models import Level, DoneList, Ranking, Profile, Edition,\
     LevelUser
 
 
-def get_level(profile):
+def get_level_to_id_user(id_user):
+    profile = Profile.objects.filter(id_user=id_user).last()
+    level_user = LevelUser.objects.filter(id_user=profile).last()
+    return level_user.number
+
+
+def get_level_to_profile(profile):
     level_user = LevelUser.objects.filter(id_user=profile).last()
     return level_user.number
 
