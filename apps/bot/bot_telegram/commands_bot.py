@@ -87,11 +87,10 @@ def done_list(message, user_name, id_user):
         return "Não pode ter mais metas compridas do que vc colocou na Task Box"
 
     elif filter_done_list(message, id_user):
-        # vai dar uma resposta pro usuario
         return level_check_up(id_user)
 
     else:
-        return "ERRO!!! Done List, fale com o ADM!!!"
+        return "ERRO!!! fale com o ADM!!!"
 
 
 def level(id_user):

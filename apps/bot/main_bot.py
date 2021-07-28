@@ -1,10 +1,14 @@
 import logging
-
-from apps.bot.bot_telegram.commands_bot import *
-
+import os
+from dotenv import load_dotenv
 from telegram import ForceReply, Update
 from telegram.ext import (CallbackContext, CommandHandler, Filters,
                           MessageHandler, Updater)
+from apps.bot.bot_telegram.commands_bot import *
+
+load_dotenv()
+
+
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -51,7 +55,8 @@ def response(update: Update, context: CallbackContext) -> None:
 
 def main() -> None:
     """Start the bot."""
-    updater = Updater("1852237008:AAFMzbuyROUQbWj3J3dO2GZbXfGX6lOJ28g")
+    TOKEN = os.getenv("TOKEN")
+    updater = Updater(TOKEN)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher

@@ -58,6 +58,7 @@ def level_check_up(id_user):
     current_data = timezone.now()
     current_data = current_data.strftime('%d/%m/%Y')
     if current_data == level_user.updated.strftime('%d/%m/%Y'):
+        
         return f""" 🔥 Parabéns ao Guerreiro que subiU de nível! 
 😁:User
 ___
