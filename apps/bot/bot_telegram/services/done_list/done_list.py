@@ -17,7 +17,7 @@ def add_done_list_false(id_user, done_list, edition, metas, metas_pro):
         done_list.edition = edition
         done_list.save()
         return ranking_conf(id_user, metas, metas_pro)
-    except ValueError as e:
+    except Exception as e:
         print(f"Erro add_done_list_false: {e}")
         return False
 
@@ -34,7 +34,7 @@ def add_done_list_true(id_user, done_list, edition, metas, metas_pro):
 
         metas = metas + 1
         return ranking_conf(id_user, metas, metas_pro)
-    except ValueError as e:
+    except Exception as e:
         print(f"Erro add_done_list_false: {e}")
         return False
 
@@ -51,6 +51,7 @@ def add_metas_done_list(id_user, streak, metas, metas_pro):
 
     # Esta meio feio de entender mas funciona
     if not done_list:
+        # bloco de criação
         if check_metas(task_box_exists, metas, metas_pro):
             # pela regra de negocio o streak_count reset a casa edição
             return create_done_list_true(id_user, streak, metas, metas_pro,
@@ -59,10 +60,13 @@ def add_metas_done_list(id_user, streak, metas, metas_pro):
             return create_done_list_false(id_user, streak, metas, metas_pro,
                                           edition, profile)
     else:
+        # bloco de add
         if check_metas(task_box_exists, metas, metas_pro):
-            if add_done_list_true(id_user, done_list, edition, metas, metas_pro):
+            if add_done_list_true(id_user, done_list, edition, metas,
+                                  metas_pro):
                 return add_bonus(profile, edition)
             else:
                 return False
         else:
-            return add_done_list_false(id_user, done_list, edition, metas, metas_pro)
+            return add_done_list_false(id_user, done_list, edition,
+                                       metas, metas_pro)

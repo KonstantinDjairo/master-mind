@@ -15,6 +15,6 @@ def add_bonus(profile, edition):
                 ranking.points = ranking.points + 50
                 ranking.save()
         return True
-    except ValueError as e:
+    except Exception as e:
         print(f"Erro add_bonus: {e}")
         return False

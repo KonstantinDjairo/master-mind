@@ -4,6 +4,7 @@ from apps.bot.models import TaskBox, Edition, Profile, DoneList
 
 
 def check_done_list_exists(id_user):
+    # exite um codigo semelhante a este
     current_data = timezone.now()
     current_data = current_data.strftime('%d/%m/%Y')
 
