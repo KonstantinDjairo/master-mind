@@ -1,7 +1,8 @@
 from django.db.models.signals import post_save, pre_delete
 
+from apps.bot.bot_telegram.services.level.level_up import (
+    get_level_to_profile, level_check, level_user_to_edit)
 from apps.bot.models import Level, LevelUser, Profile, Ranking
-from apps.bot.bot_telegram.services.level.level_up import level_check, level_user_to_edit, get_level_to_profile
 
 
 def create_level_user(sender, instance, created, **kwargs):

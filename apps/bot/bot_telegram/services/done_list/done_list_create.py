@@ -17,7 +17,6 @@ def create_done_list_true(id_user, streak, metas, metas_pro, edition, profile):
                                 streak_count=1, streak_max=1,
                                 edition=edition)
         metas = metas + 1
-        print(f"aaa  {metas}")
         return ranking_conf(id_user, metas, metas_pro)
     except Exception as e:
         print(f"Erro create_done_list_true: {e}")

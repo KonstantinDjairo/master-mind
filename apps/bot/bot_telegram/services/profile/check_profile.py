@@ -14,7 +14,7 @@ def check_profile_exists(id_user):
 def check_time_task_box():
     time_str = timezone.now()
     time = int(time_str.strftime("%H"))
-
+    # horario maximo para mandar a task bot
     if time > 11:
         return True
     else:
@@ -38,7 +38,7 @@ def check_profile_active(id_user):
 
 def chek_profile(id_user):
     profile = check_profile_exists(id_user).last()
-    if profile.pk:
+    if profile:
         return True
     else:
         return False

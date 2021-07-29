@@ -42,8 +42,8 @@ def task_box(message, user_name, id_user):
     if not check_profile_exists(id_user):
         return "User não existe \n/c 🤝"
 
-    # elif check_time_task_box():
-    #    return "❌ Prazo de Envio da TaskBox Encerrada!"
+    elif check_time_task_box():
+       return "❌ Prazo de Envio da TaskBox Encerrada!"
 
     elif not check_profile_active(id_user):
         return "User Bloqueado"
@@ -80,8 +80,8 @@ def done_list(message, user_name, id_user):
     elif not check_task_exists(id_user):
         return "ERRO!!! Você não adicionou a task box de hoje "
 
-    # elif check_done_list_exists(id_user):
-    #    return "ERRO!!! Você ja adicionou done_list hoje "
+    elif check_done_list_exists(id_user):
+       return "ERRO!!! Você ja adicionou done_list hoje "
 
     elif check_done(message, id_user):
         return "Não pode ter mais metas compridas do que vc colocou na Task Box"

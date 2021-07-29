@@ -1,8 +1,7 @@
-import re
-
-from apps.bot.models import Level, DoneList, Ranking, Profile, Edition
 from apps.bot.bot_telegram.message_filters.filter_task_box import \
     filter_task_box
+from apps.bot.models import Level, Profile
+
 from .level_up import get_level_to_profile
 
 

@@ -14,7 +14,7 @@ def filter_emoji(message):
         if 1 == len(icon):
             return icon
 
-    except ValueError as e:
+    except Exception as e:
         print(f"ERRO, filter_emoji: {e}")
         return None
 
@@ -31,7 +31,7 @@ def create_profile(message, user_name, id_user):
         else:
             Profile.objects.create(id_user=id_user, user_name=user_name)
             return True
-    except ValueError as e:
+    except Exception as e:
         print(f"ERRO, create_profile: {e}")
         return False
 

@@ -23,7 +23,7 @@ def level_user_to_edit(number, profile):
         level_user.number = level.number
         level_user.save(force_update=True)
         return True
-    except ValueError as e:
+    except Exception as e:
         print(f"Erro level_user_To_edit: {e}")
         return False
 

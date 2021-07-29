@@ -1,7 +1,10 @@
-from apps.bot.models import DoneList, Profile, Edition, Ranking
+from apps.bot.models import DoneList, Ranking
 
 
 def add_bonus(profile, edition):
+    """
+    add bonos the ranking
+    """
     done_list = DoneList.objects.filter(id_user=profile.pk,
                                         edition=edition).last()
     ranking = Ranking.objects.filter(id_user=profile.pk,

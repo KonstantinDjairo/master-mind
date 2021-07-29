@@ -24,8 +24,8 @@ def filter_task_box(message):
     if "Metas" in message:
         metas_list = re.findall("⏱", message[0:start])
         metas = len(metas_list)
+    
     lista.append({"metas": metas, "metas_pro": metas_pro})
-
     return lista
 
 

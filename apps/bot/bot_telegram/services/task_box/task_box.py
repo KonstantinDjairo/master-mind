@@ -10,7 +10,7 @@ def create_task_box(id_user, metas, metas_pro):
         TaskBox.objects.create(id_user=profile, metas=metas,
                                metas_pro=metas_pro, edition=edition)
         return True
-    except ValueError as e:
+    except Exception as e:
         print(f"Erro create_task_box: {e}")
         return False
 
@@ -19,6 +19,7 @@ def add_task_box(id_user, metas, metas_pro, user_pk):
     task_box = TaskBox.objects.filter(pk=user_pk).last()
     edition = Edition.objects.filter(active=True).last()
 
+    # caso for falço, vai add a task box na ultima edição ativa
     if edition.pk == task_box.edition:
         try:
             task_box = TaskBox.objects.get(pk=user_pk)
@@ -27,7 +28,7 @@ def add_task_box(id_user, metas, metas_pro, user_pk):
             task_box.edition = edition.pk
             task_box.save()
             return True
-        except ValueError as e:
+        except Exception as e:
             print(f"Erro add_task_box: {e}")
             return False
     else:
