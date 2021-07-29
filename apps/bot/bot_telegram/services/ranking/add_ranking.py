@@ -26,6 +26,7 @@ def update_ranking(profile, done_list, edition, metas, metas_pro):
     """
     update_ranking
     """
+    points = 0
     metas_done_list = done_list.metas / 10
     metas_pro_list = done_list.metas_pro / 10
     points_user = metas_done_list + metas_pro_list
@@ -35,18 +36,19 @@ def update_ranking(profile, done_list, edition, metas, metas_pro):
     metas = round(metas, 2)
     metas_pro = round(metas_pro, 2)
 
-    try:
-        ranking = Ranking.objects.filter(id_user=profile.pk,
-                                         edition=edition.pk).last()
+    #try:
+    ranking = Ranking.objects.filter(id_user=profile.pk,
+                                        edition=edition.pk).last()
 
-        ranking.points = ranking.points + points_user
-        ranking.metas = ranking.metas + metas
-        ranking.metas_pro = ranking.metas_pro + metas_pro
-        ranking.save()
-        return True
-    except Exception as e:
-        print(f"Erro update_ranking: {e}")
-        return False
+    ranking.points = ranking.points + points_user
+    ranking.metas = ranking.metas + metas
+    ranking.metas_pro = ranking.metas_pro + metas_pro
+    ranking.save()
+
+    return True
+    # except Exception as e:
+    #     print(f"Erro update_ranking: {e}")
+    #     return False
 
 
 def ranking_conf(id_user, metas, metas_pro):

@@ -1,8 +1,8 @@
 from django.utils import timezone
 
-from apps.bot.models import Level, DoneList, Ranking, Profile, Edition,\
+from apps.bot.models import Level, Ranking, Profile,\
     LevelUser
-
+from apps.bot.bot_telegram.services.level.level_prestige import prestige_check, level_user_to_edit_prestige
 
 def get_level_to_id_user(id_user):
     profile = Profile.objects.filter(id_user=id_user).last()
@@ -32,7 +32,7 @@ def level_check(profile):
     """
     check up nivel
     """
-    points = 0
+    global points
     level_current = None
     ranking = Ranking.objects.filter(id_user=profile)
     level = Level.objects.all().order_by("number")
@@ -57,21 +57,32 @@ def level_check_up(id_user):
 
     current_data = timezone.now()
     current_data = current_data.strftime('%d/%m/%Y')
-    if current_data == level_user.updated.strftime('%d/%m/%Y'):
-        
-        return f""" 🔥 Parabéns ao Guerreiro que subiU de nível! 
+    
+    message =  f""" 🔥 Parabéns ao Guerreiro que subiU de nível! 
 😁:User
 ___
 {level.title}:
 +1 Meta
 +1 ProMode
-
+Pontos totais: {points}
 ⚔️:{profile.user_name}
 _
 
 👉🏻 Vocês poderão adicionar as suas novas atribuições a partir do próximo envio da TaskBox.
 _
 """
+    # fazer refatoração neste codigo
+    if current_data == level_user.updated.strftime('%d/%m/%Y'):
+        if level.number ==  10:
+            if not prestige_check(profile):
+                return "Faça o update pra prestigio com o comando /up"
+            else:
+                if level_user_to_edit_prestige(profile):
+                    return "Tudo ok"
+                else:
+                    return "Erro inesperado "
+        else:
+            return message
     else:
         return f"Parabens {profile.user_name}"
 

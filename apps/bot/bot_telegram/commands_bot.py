@@ -77,11 +77,11 @@ def done_list(message, user_name, id_user):
     elif not edition_active():
         return "ERRO!!! Não a nenhuma edição ativa"
 
-    elif not check_task_exists(id_user):
-        return "ERRO!!! Você não adicionou a task box de hoje "
+    # elif not check_task_exists(id_user):
+    #     return "ERRO!!! Você não adicionou a task box de hoje "
 
-    elif check_done_list_exists(id_user):
-       return "ERRO!!! Você ja adicionou done_list hoje "
+    # elif check_done_list_exists(id_user):
+    #    return "ERRO!!! Você ja adicionou done_list hoje "
 
     elif check_done(message, id_user):
         return "Não pode ter mais metas compridas do que vc colocou na Task Box"
