@@ -7,7 +7,8 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=100, blank=True, default="...")
     last_name = models.CharField(max_length=100, blank=True, default="...")
     icon = models.CharField(max_length=10, blank=True, default="🙂", null=True)
-    
+
+    #slug = models.SlugField(max_length=250)
     active = models.BooleanField(null=False, default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
