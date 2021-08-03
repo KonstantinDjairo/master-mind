@@ -159,6 +159,7 @@ LOGIN_REDIRECT_URL = '/'
 #APP_LOG_FILENAME = os.path.join(BASE_DIR, 'log/app.log')
 #ERROR_LOG_FILENAME = os.path.join(BASE_DIR, 'log/error.log')
 
+'''
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -179,7 +180,7 @@ LOGGING = {
         },
     },
 }
-
+'''
 
 CRONJOBS =[
     ('* / 5 * * * *', 'apps.bot.cron.print_hello')
