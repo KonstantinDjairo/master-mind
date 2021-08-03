@@ -43,7 +43,7 @@ class LevelUser(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.id_user} - {self.level}"
+        return f"{self.id_user}"
 
 
 class Edition(models.Model):
@@ -63,7 +63,7 @@ class Edition(models.Model):
         ordering = ["-number"]
 
     def __str__(self):
-        return f"{str(self.title)} - {self.number}"
+        return f"{str(self.title)}"
 
 
 class Ranking(models.Model):
@@ -81,7 +81,7 @@ class Ranking(models.Model):
         ordering = ["-points"]
 
     def __str__(self):
-        return f"{str(self.id_user)} - {self.points}"
+        return f"{str(self.id_user)}"
 
     
 class DoneList(models.Model):

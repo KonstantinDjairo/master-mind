@@ -8,8 +8,6 @@ from apps.bot.bot_telegram.commands_bot import *
 
 load_dotenv()
 
-
-
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO

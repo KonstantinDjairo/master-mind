@@ -9,6 +9,7 @@ psycopg2 = "*"
 django-crispy-forms = "*"
 python-telegram-bot = "*"
 python-dotenv = "*"
+django-crontab = "*"
 
 [dev-packages]
 

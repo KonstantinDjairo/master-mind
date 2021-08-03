@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import os 
+import os
+import logging
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'django_crontab',
     'apps.account',
     'apps.index',
     'apps.bot',
@@ -150,5 +152,35 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = '/'
 
+
 # para produção
 # python manage.py collectstatic
+
+#APP_LOG_FILENAME = os.path.join(BASE_DIR, 'log/app.log')
+#ERROR_LOG_FILENAME = os.path.join(BASE_DIR, 'log/error.log')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+    },
+}
+
+
+CRONJOBS =[
+    ('* / 5 * * * *', 'apps.bot.cron.print_hello')
+]
