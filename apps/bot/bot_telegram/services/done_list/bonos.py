@@ -1,14 +1,12 @@
 from apps.bot.models import DoneList, Ranking
 
 
-def add_bonus(profile, edition):
+def add_bonus(profile):
     """
-    add bonos the ranking
+    add bonus the ranking
     """
-    done_list = DoneList.objects.filter(id_user=profile.pk,
-                                        edition=edition).last()
-    ranking = Ranking.objects.filter(id_user=profile.pk,
-                                     edition=edition).last()
+    done_list = DoneList.objects.filter(id_user=profile.pk).last()
+    ranking = Ranking.objects.filter(id_user=profile.pk).last()
     try:
         if done_list.streak_count == 7:
             ranking.points = ranking.points + 10
