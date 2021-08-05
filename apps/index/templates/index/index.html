@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container">
-        <div class="row-cols-1">
 
-        </div>
+    <div >
+      {% for profile in profiles %}
+         {{ profile.user_name }}
+
+         {% endfor %}
     </div>
+
+{% include "main/pagination.html" with page=profiles %}
 {% endblock content %}
-
-
-
