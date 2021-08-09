@@ -12,11 +12,10 @@ def index(request):
     try:
         profiles = paginator.page(page)
     except PageNotAnInteger:
-
         profiles = paginator.page(1)
     except EmptyPage:
-
         profiles = paginator.page(paginator.num_pages)
+
     return render(request, "index/index.html", {'page': page, 'profiles': profiles})
 
 

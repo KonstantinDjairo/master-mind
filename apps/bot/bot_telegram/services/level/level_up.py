@@ -1,8 +1,7 @@
+from apps.bot.bot_telegram.services.level.level_prestige import (
+    level_user_to_edit_prestige, prestige_check)
+from apps.bot.models import Level, LevelUser, Profile, Ranking
 from django.utils import timezone
-
-from apps.bot.models import Level, Ranking, Profile,\
-    LevelUser
-from apps.bot.bot_telegram.services.level.level_prestige import prestige_check, level_user_to_edit_prestige
 
 
 def get_level_to_id_user(id_user):

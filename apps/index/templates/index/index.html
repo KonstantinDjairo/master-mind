@@ -4,8 +4,7 @@
     <div >
       {% for profile in profiles %}
          {{ profile.user_name }}
-
-         {% endfor %}
+        {% endfor %}
     </div>
 
 {% include "main/pagination.html" with page=profiles %}
